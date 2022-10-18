@@ -11,7 +11,6 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] GameObject Attack;
     private float angle;
 
-    bool canAttack = true;
 
     Timer Cadence;
 
@@ -19,21 +18,14 @@ public class PlayerAim : MonoBehaviour
     private void Awake()
     {
         pM = GetComponent<PlayerManager>();
-        Cadence = new Timer(0.45f);
-        Cadence.OnTime += EnableAtt;
-    }
 
-    private void EnableAtt(object sender, EventArgs e)
-    {
-        canAttack = true;
     }
 
     private void Update()
     {
-        Cadence.Update();
         HandleAim();
 
-        if(canAttack) HandleShooting();
+        HandleShooting();
     }
     private void HandleAim()
     {
@@ -51,8 +43,6 @@ public class PlayerAim : MonoBehaviour
         {
             GameObject gm =Instantiate<GameObject>(Attack, Caster);
             gm.transform.eulerAngles = new Vector3(0f,0f,angle);
-            canAttack = false;
-            Cadence.Start();
 
             pM.OnMouseClicked(EventArgs.Empty);
             

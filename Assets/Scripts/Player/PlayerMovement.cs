@@ -14,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float movX = Input.GetAxisRaw("Horizontal");
         float movY = Input.GetAxisRaw("Vertical");
 
-        rb.velocity = new Vector2(movX, movY).normalized * velocity;
+        rb.velocity = new Vector2(movX, movY).normalized * velocity * Time.deltaTime;
+
+        Debug.Log(rb.velocity);
 
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     public event EventHandler OnClick;
+    public event EventHandler OnHit;
 
     Rigidbody2D rb;
 
@@ -48,7 +49,7 @@ public class PlayerManager : MonoBehaviour
         Debug.Log(dir);
 
         rb.velocity = Vector2.zero;
-        rb.AddForce(dir * 0.5f, ForceMode2D.Impulse);
+        rb.AddForce(dir * 0.25f, ForceMode2D.Impulse);
 
     }
 
@@ -58,6 +59,14 @@ public class PlayerManager : MonoBehaviour
         gameObject.GetComponent<PlayerMovement>().enabled = true;
         gameObject.GetComponent<PlayerAim>().enabled = true;
         disableTimer.Stop();
+    }
+
+
+    private void ApplyKnockBack(Vector2 direction)
+    {
+        rb.velocity = Vector2.zero;
+        rb.AddForce(direction,ForceMode2D.Impulse);
+
     }
 
 }

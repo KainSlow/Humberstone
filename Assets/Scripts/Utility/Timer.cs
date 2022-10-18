@@ -11,11 +11,17 @@ public class Timer
     private float currentTime;
 
     private bool isLooping;
-    private bool isActive;
+    public bool isActive { get; private set; }
 
     public Timer(float _endTime)
     {
         endTime = _endTime;
+        isLooping = false;
+    }
+
+    public void SetCoolDown(float newValue)
+    {
+        endTime = newValue;
     }
 
     public void Start()
@@ -40,7 +46,6 @@ public class Timer
         isActive = false;
     }
 
-
     public void Update()
     {
         if (isActive)
@@ -59,9 +64,7 @@ public class Timer
                 {
                     isActive = false;
                 }
-
             }
         }
     }
-
 }
