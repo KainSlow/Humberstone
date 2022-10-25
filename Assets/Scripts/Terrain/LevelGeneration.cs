@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelGeneration : MonoBehaviour
 {
-
+    [SerializeField] GameObject oPlayer;
     [SerializeField] Transform[] startingPositions;
     [SerializeField] public GameObject[] rooms; // index 0 --> closed, index 1 --> LR, index 2 --> LRB, index 3 --> LRT, index 4 --> LRBT
     [SerializeField] LayerMask whatIsRoom;
@@ -29,6 +29,7 @@ public class LevelGeneration : MonoBehaviour
         int randStartingPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartingPos].position;
         Instantiate(rooms[1], transform.position, Quaternion.identity);
+        Instantiate(oPlayer, transform.position, Quaternion.identity);
 
         direction = Random.Range(1, 6);
     }
@@ -110,7 +111,6 @@ public class LevelGeneration : MonoBehaviour
             {
                 // Now I must replace the room BEFORE going down with a room that has a DOWN opening, so type 3 or 5
                 Collider2D previousRoom = Physics2D.OverlapCircle(transform.position, 1, whatIsRoom);
-                Debug.Log(previousRoom);
                 if (previousRoom.GetComponent<RoomType>().getType() != 4 && previousRoom.GetComponent<RoomType>().getType() != 2)
                 {
 
@@ -145,6 +145,9 @@ public class LevelGeneration : MonoBehaviour
                 Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
 
                 direction = Random.Range(1, 6);
+
+                Destroy(previousRoom);
+
             }
             else
             {

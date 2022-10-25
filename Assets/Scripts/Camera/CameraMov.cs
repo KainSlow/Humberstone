@@ -6,7 +6,7 @@ public class CameraMov : MonoBehaviour
 {
 
     [SerializeField] Camera cam;
-    [SerializeField] Transform player;
+    [SerializeField] public Transform player;
     [SerializeField] float threshold;
 
     [SerializeField] Vector3 offSet;
@@ -16,6 +16,7 @@ public class CameraMov : MonoBehaviour
 
     void FixedUpdate()
     {
+
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPos = (player.position + mousePos) / 2f;
 

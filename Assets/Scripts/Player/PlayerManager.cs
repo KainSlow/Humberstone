@@ -30,6 +30,12 @@ public class PlayerManager : MonoBehaviour
         hitCD.OnTime += EnablePlayer;
     }
 
+    private void Start()
+    {
+        GameObject cam = GameObject.Find("CameraHolder");
+        cam.GetComponent<CameraMov>().player = transform;
+    }
+
     public virtual void OnMouseClicked(EventArgs e)
     {
         EventHandler handler = OnClick;
@@ -45,22 +51,18 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        if (disableTimer.isActive)
-        {
-            disableTimer.Update();
-        }
-
-        if (hitCD.isActive)
-        {
-            hitCD.Update();
-        }
+        Debug.Log(disableTimer.CurrentTime);
+        Debug.Log(GetComponent<PlayerAim>().enabled);
+        disableTimer.Update();
+        
+        hitCD.Update();
+        
     }
 
     public void DisableMov()
     {
         gameObject.GetComponent<PlayerMovement>().enabled = false;
         gameObject.GetComponent<PlayerAim>().enabled = false;
-
         disableTimer.Start();
     }
 

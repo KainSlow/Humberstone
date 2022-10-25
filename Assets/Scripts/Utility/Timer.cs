@@ -8,7 +8,7 @@ public class Timer
     public event EventHandler OnTime;
 
     private float endTime;
-    private float currentTime;
+    public float CurrentTime { get; private set; }
 
     private bool isLooping;
     public bool isActive { get; private set; }
@@ -24,16 +24,26 @@ public class Timer
         endTime = newValue;
     }
 
+    public void ActivateLooping()
+    {
+        isLooping = true;
+    }
+
+    public void DeActivateLooping()
+    {
+        isLooping = false;
+    }
+
     public void Start()
     {
         isActive = true;
-        currentTime = 0;
+        CurrentTime = 0;
     }
 
     public void Stop()
     {
         isActive = false;
-        currentTime = 0;
+        CurrentTime = 0;
     }
 
     public void Resume()
@@ -50,11 +60,11 @@ public class Timer
     {
         if (isActive)
         {
-            currentTime += Time.deltaTime;
+            CurrentTime += Time.deltaTime;
 
-            if(currentTime >= endTime)
+            if(CurrentTime >= endTime)
             {
-                currentTime -= currentTime;
+                CurrentTime -= CurrentTime;
 
                 EventHandler handler = OnTime;
 

@@ -27,7 +27,6 @@ public class PlayerObserver : MonoBehaviour
     }
     private void StopPlayer(object sender, EventArgs e) => pM.DisableMov();
 
-
     private void ApplyKnocback(object sender, EventArgs e) => pM.DisableMov();
    
 

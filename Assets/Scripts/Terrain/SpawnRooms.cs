@@ -22,8 +22,13 @@ public class SpawnRooms : MonoBehaviour
             //Spawn room
             int rand = Random.Range(0, levelGen.rooms.Length);
             Instantiate(levelGen.rooms[rand], transform.position, Quaternion.identity);
+        }
+
+        if (levelGen.stopGeneration)
+        {
             Destroy(gameObject);
         }
+
 
     }
 }

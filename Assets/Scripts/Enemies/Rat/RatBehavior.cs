@@ -75,7 +75,6 @@ public class RatBehavior : EnemyBehavior
             idleTime.Start();
         }
 
-        Debug.Log(collision);
     }
     #endregion
 
