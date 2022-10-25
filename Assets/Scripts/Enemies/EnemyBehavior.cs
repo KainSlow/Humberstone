@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyBehavior : MonoBehaviour
 {
@@ -32,6 +33,23 @@ public class EnemyBehavior : MonoBehaviour
 
         rb.velocity = new Vector2(dirPlayer.x, dirPlayer.y).normalized * speed * Time.deltaTime;
 
+    }
+
+    protected virtual void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision == null)
+        {
+            return;
+        }
+
+        Debug.Log(collision.gameObject.name);
+
+        if (collision.gameObject.CompareTag("Attack"))
+        {
+            Vector3 dir = collision.transform.position - transform.position;
+            GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
+            GetComponent<EnemyManager>().SetDir(dir.normalized);
+        }
     }
 
 }

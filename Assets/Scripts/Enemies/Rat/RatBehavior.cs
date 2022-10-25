@@ -62,16 +62,20 @@ public class RatBehavior : EnemyBehavior
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        if(collision == null)
+        if(collision == null || collision.transform.parent == null)
         {
             return;
         }
+
+
+        Debug.Log(player);
+        Debug.Log(collision);
+
 
         if(collision.transform.parent.name == player.name)
         {
             isMovingToPlayer = false;
             rb.velocity = Vector2.zero;
-
             idleTime.Start();
         }
 

@@ -29,7 +29,8 @@ public class LevelGeneration : MonoBehaviour
         int randStartingPos = Random.Range(0, startingPositions.Length);
         transform.position = startingPositions[randStartingPos].position;
         Instantiate(rooms[1], transform.position, Quaternion.identity);
-        Instantiate(oPlayer, transform.position, Quaternion.identity);
+
+        GameObject.Find("Player").transform.position = transform.position;
 
         direction = Random.Range(1, 6);
     }

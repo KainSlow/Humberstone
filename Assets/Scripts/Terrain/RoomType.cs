@@ -10,7 +10,8 @@ public class RoomType : MonoBehaviour
 
     public void RoomDestroy()
     {
-        Destroy(gameObject);
+        if(gameObject != null) Destroy(gameObject);
+        
     }
 
 

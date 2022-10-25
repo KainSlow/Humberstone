@@ -57,8 +57,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2800077596727501124}
-  - component: {fileID: 2800077596727501125}
   - component: {fileID: 2800077596727501122}
+  - component: {fileID: 2800077596727501125}
+  - component: {fileID: -822408910333258745}
   m_Layer: 0
   m_Name: EnemyRat
   m_TagString: Enemy
@@ -84,21 +85,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2800077596727501125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2800077596727501127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75ca6ca1f2c421b44a738b1bb2c9a80d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  detectorRaidus: 7
-  speed: 150
-  prowlDistance: 3
 --- !u!50 &2800077596727501122
 Rigidbody2D:
   serializedVersion: 4
@@ -120,6 +106,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &2800077596727501125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800077596727501127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ca6ca1f2c421b44a738b1bb2c9a80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  detectorRaidus: 7
+  speed: 150
+  prowlDistance: 3
+--- !u!114 &-822408910333258745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800077596727501127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f264dbd30521c49bb5ad8319bb4f12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackForce: 10
+  disableTime: 0.5
 --- !u!1 &2800077597903837417
 GameObject:
   m_ObjectHideFlags: 0

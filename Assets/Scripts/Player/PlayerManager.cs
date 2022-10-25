@@ -51,8 +51,6 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(disableTimer.CurrentTime);
-        Debug.Log(GetComponent<PlayerAim>().enabled);
         disableTimer.Update();
         
         hitCD.Update();
