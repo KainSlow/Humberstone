@@ -21,7 +21,5 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = new Vector2(movX, movY).normalized * velocity * Time.deltaTime;
 
-        Debug.Log(rb.velocity);
-
     }
 }

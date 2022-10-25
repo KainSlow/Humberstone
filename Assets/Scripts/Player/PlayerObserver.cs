@@ -12,9 +12,24 @@ public class PlayerObserver : MonoBehaviour
         pM = GetComponent<PlayerManager>();
     }
 
-    private void OnEnable() => pM.OnClick += StopPlayer;
-    private void OnDisable() => pM.OnClick -= StopPlayer;
+    private void OnEnable()
+    {
+        pM.OnClick += StopPlayer;
 
+        pM.OnHit += ApplyKnocback;
+    }
+
+    private void OnDisable()
+    {
+        pM.OnClick -= StopPlayer;
+
+        pM.OnHit -= ApplyKnocback;
+    }
     private void StopPlayer(object sender, EventArgs e) => pM.DisableMov();
+
+
+    private void ApplyKnocback(object sender, EventArgs e) => pM.DisableMov();
+   
+
 
 }

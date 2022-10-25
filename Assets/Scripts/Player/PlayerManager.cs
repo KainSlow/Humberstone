@@ -8,16 +8,26 @@ public class PlayerManager : MonoBehaviour
     public event EventHandler OnClick;
     public event EventHandler OnHit;
 
+    [SerializeField] float attackCD;
+    [SerializeField] float knockbackDuration;
+    [SerializeField] float knockbackForce;
+
     Rigidbody2D rb;
 
     Timer disableTimer;
-    bool isPlayerD;
+    Timer hitCD;
 
+    private Vector3 direction;
     private void Awake()
     {
+        OnClick += ApplyFowardForce;
+        OnHit += ApplyKnockBack;
+
         rb = GetComponent<Rigidbody2D>();
-        disableTimer = new Timer(0.3f);
+        disableTimer = new Timer(attackCD);
         disableTimer.OnTime += EnablePlayer;
+        hitCD = new Timer(knockbackDuration);
+        hitCD.OnTime += EnablePlayer;
     }
 
     public virtual void OnMouseClicked(EventArgs e)
@@ -26,47 +36,73 @@ public class PlayerManager : MonoBehaviour
         handler?.Invoke(this, e);
     }
 
+    public virtual void OnPlayerHitted(EventArgs e)
+    {
+        EventHandler handler = OnHit;
+        handler?.Invoke(this, e);
+    }
+
 
     private void Update()
     {
-        if (isPlayerD)
+        if (disableTimer.isActive)
         {
             disableTimer.Update();
+        }
+
+        if (hitCD.isActive)
+        {
+            hitCD.Update();
         }
     }
 
     public void DisableMov()
     {
-        isPlayerD = true;
         gameObject.GetComponent<PlayerMovement>().enabled = false;
         gameObject.GetComponent<PlayerAim>().enabled = false;
-        disableTimer.Start();
 
+        disableTimer.Start();
+    }
+
+    private void ApplyFowardForce(object sender, EventArgs e)
+    {
         Vector3 cameraPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 dir = (cameraPos - transform.position);
         dir.z = 0;
         dir.Normalize();
-        Debug.Log(dir);
 
         rb.velocity = Vector2.zero;
         rb.AddForce(dir * 0.25f, ForceMode2D.Impulse);
-
     }
 
     private void EnablePlayer(object sender, EventArgs e)
     {
-        isPlayerD = false;
         gameObject.GetComponent<PlayerMovement>().enabled = true;
         gameObject.GetComponent<PlayerAim>().enabled = true;
         disableTimer.Stop();
     }
 
 
-    private void ApplyKnockBack(Vector2 direction)
+    public void ApplyKnockBack(object sender, EventArgs e)
     {
         rb.velocity = Vector2.zero;
-        rb.AddForce(direction,ForceMode2D.Impulse);
+        rb.AddForce(direction * knockbackForce ,ForceMode2D.Impulse);
+    }
 
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (hitCD.isActive)
+        {
+            return;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            direction = (transform.position - collision.transform.position).normalized;
+            direction.z = 0;
+
+            OnPlayerHitted(EventArgs.Empty);
+        }
     }
 
 }

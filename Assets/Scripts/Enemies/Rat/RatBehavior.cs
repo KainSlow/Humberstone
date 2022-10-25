@@ -45,10 +45,13 @@ public class RatBehavior : EnemyBehavior
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.parent.name == player.name)  
+        if(collision.gameObject == null || collision == null || collision.transform.parent == null)
         {
-            Debug.Log("player detected");
+            return;
+        }
 
+        if(collision.transform.parent.name == player.name)
+        {
             isMovingToPlayer = true;
 
             prowlTime.Stop();
@@ -58,6 +61,12 @@ public class RatBehavior : EnemyBehavior
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+
+        if(collision == null)
+        {
+            return;
+        }
+
         if(collision.transform.parent.name == player.name)
         {
             isMovingToPlayer = false;
@@ -65,6 +74,8 @@ public class RatBehavior : EnemyBehavior
 
             idleTime.Start();
         }
+
+        Debug.Log(collision);
     }
     #endregion
 

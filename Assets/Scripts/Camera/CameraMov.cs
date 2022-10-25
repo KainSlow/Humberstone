@@ -16,8 +16,6 @@ public class CameraMov : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log("Funciono aaa");
-
         Vector3 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPos = (player.position + mousePos) / 2f;
 
