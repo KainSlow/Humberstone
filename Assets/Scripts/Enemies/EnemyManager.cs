@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     private void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
         disableTimer = new Timer(disableTime);
         disableTimer.OnTime += EnableMov;
         OnHit += ApplyKnockBack;

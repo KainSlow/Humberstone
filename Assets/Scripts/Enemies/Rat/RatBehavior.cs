@@ -67,11 +67,6 @@ public class RatBehavior : EnemyBehavior
             return;
         }
 
-
-        Debug.Log(player);
-        Debug.Log(collision);
-
-
         if(collision.transform.parent.name == player.name)
         {
             isMovingToPlayer = false;

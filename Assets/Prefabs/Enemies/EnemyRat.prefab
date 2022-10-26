@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockbackForce: 10
-  disableTime: 0.5
+  disableTime: 0.3
 --- !u!1 &2800077597903837417
 GameObject:
   m_ObjectHideFlags: 0

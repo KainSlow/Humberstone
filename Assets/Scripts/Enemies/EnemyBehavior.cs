@@ -42,13 +42,14 @@ public class EnemyBehavior : MonoBehaviour
             return;
         }
 
-        Debug.Log(collision.gameObject.name);
 
         if (collision.gameObject.CompareTag("Attack"))
         {
-            Vector3 dir = collision.transform.position - transform.position;
+            Vector3 dir = (transform.position - player.transform.position).normalized;
+            dir.z = 0;
+
+            GetComponent<EnemyManager>().SetDir(dir);
             GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
-            GetComponent<EnemyManager>().SetDir(dir.normalized);
         }
     }
 
