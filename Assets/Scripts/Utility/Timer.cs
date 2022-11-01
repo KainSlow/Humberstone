@@ -7,7 +7,7 @@ public class Timer
 {
     public event EventHandler OnTime;
 
-    private float endTime;
+    public float EndTime { get; private set; }
     public float CurrentTime { get; private set; }
 
     private bool isLooping;
@@ -15,13 +15,13 @@ public class Timer
 
     public Timer(float _endTime)
     {
-        endTime = _endTime;
+        EndTime = _endTime;
         isLooping = false;
     }
 
     public void SetCoolDown(float newValue)
     {
-        endTime = newValue;
+        EndTime = newValue;
     }
 
     public void ActivateLooping()
@@ -46,6 +46,18 @@ public class Timer
         CurrentTime = 0;
     }
 
+    public void Stop(bool isCalling)
+    {
+        isActive = false;
+        CurrentTime = 0;
+
+        if (isCalling)
+        {
+            CallEvent();
+        }
+
+    }
+
     public void Resume()
     {
         isActive = true;
@@ -62,13 +74,11 @@ public class Timer
         {
             CurrentTime += Time.deltaTime;
 
-            if(CurrentTime >= endTime)
+            if(CurrentTime >= EndTime)
             {
                 CurrentTime -= CurrentTime;
 
-                EventHandler handler = OnTime;
-
-                handler?.Invoke(this, EventArgs.Empty);
+                CallEvent();
 
                 if (!isLooping)
                 {
@@ -77,4 +87,12 @@ public class Timer
             }
         }
     }
+
+    private void CallEvent()
+    {
+        EventHandler handler = OnTime;
+
+        handler?.Invoke(this, EventArgs.Empty);
+    }
+
 }

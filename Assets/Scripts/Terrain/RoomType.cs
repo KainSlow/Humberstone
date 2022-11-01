@@ -14,7 +14,6 @@ public class RoomType : MonoBehaviour
         
     }
 
-
     public int getType()
     {
         return type;

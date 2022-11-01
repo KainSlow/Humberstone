@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2794567990433440492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2794567990433440494}
+  - component: {fileID: 2794567990433440493}
+  m_Layer: 0
+  m_Name: LevelGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2794567990433440494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794567990433440492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2794567990433440493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794567990433440492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d898052c9613a6841a460259caf5d81c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oPlayer: {fileID: 0}
+  oCam: {fileID: 0}
+  rooms:
+  - {fileID: 173729113066585357, guid: 9d9f8418ae849c041af13d12b33188ed, type: 3}
+  - {fileID: 843307748144150340, guid: 9b26a735d381eea4f93174c36226a5ad, type: 3}
+  - {fileID: 4292817582677119525, guid: 71b67bde19652e948bb3c745c7e16be6, type: 3}
+  - {fileID: 4276046705729721502, guid: 5fc090b1b44ef2a40a5de277e0f88db7, type: 3}
+  - {fileID: 6324840263836217600, guid: 0a2afddf94f43504c9c8d0520660ca77, type: 3}
+  FillRoom: {fileID: 2997929625371225941, guid: ffcc82de48177044a893f08629cf6e23, type: 3}
+  whatIsRoom:
+    serializedVersion: 2
+    m_Bits: 64
+  moveIncrement: 20
+  matrixWidth: 6
+  matrixHeight: 4
+  stopGeneration: 0

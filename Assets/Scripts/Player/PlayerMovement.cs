@@ -5,11 +5,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-    [SerializeField] float velocity;
+    float velocity;
     // Start is called before the first frame update
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        velocity = PlayerGlobals.Instance.Speed * 200;
     }
 
 

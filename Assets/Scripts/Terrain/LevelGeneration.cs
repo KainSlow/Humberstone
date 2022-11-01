@@ -6,155 +6,448 @@ using UnityEngine.SceneManagement;
 public class LevelGeneration : MonoBehaviour
 {
     [SerializeField] GameObject oPlayer;
-    [SerializeField] Transform[] startingPositions;
+    [SerializeField] GameObject oCam;
     [SerializeField] public GameObject[] rooms; // index 0 --> closed, index 1 --> LR, index 2 --> LRB, index 3 --> LRT, index 4 --> LRBT
+    [SerializeField] GameObject FillRoom;
     [SerializeField] LayerMask whatIsRoom;
     [SerializeField] float moveIncrement;
-    [SerializeField] float startTimeBtwSpawn;
+    [SerializeField] int matrixWidth;
+    [SerializeField] int matrixHeight;
 
-    [SerializeField] float minX;
-    [SerializeField] float maxX;
-    [SerializeField] float minY;
+    enum Rooms
+    {
+        Closed,
+        LR,
+        LRB,
+        LRT,
+        LRBT
+    };
 
-
-    private int direction;
+    private int direction; // 1 & 2 -> right, 3 & 4 -> left, 5 -> down
     public bool stopGeneration;
-    private int downCounter;
+    private int[,] matrix;
 
-    private float timeBtwSpawn;
+    private Vector3 startPos; 
+
+
+    private  int cX;
+    private  int cY;
 
     private void Start()
     {
+        matrix = new int[matrixHeight, matrixWidth];
 
-        int randStartingPos = Random.Range(0, startingPositions.Length);
-        transform.position = startingPositions[randStartingPos].position;
-        Instantiate(rooms[1], transform.position, Quaternion.identity);
 
-        GameObject.Find("Player").transform.position = transform.position;
+        GenMatrix();
+        GeneratePath();
+        VerifyPath();
+        FillMatrix();
+        ReSizeMatrix();
 
-        direction = Random.Range(1, 6);
+        oPlayer.transform.position = startPos;
+        oCam.transform.position = startPos;
+
+
+        /*
+        string txt = "";
+        for(int i = 0; i < matrixHeight; i++)
+        {
+            for(int k = 0; k< matrixWidth; k++)
+            {
+                txt += matrix[i, k] + ", ";
+            }
+            txt += "\n";
+        }
+
+        Debug.Log(txt);
+        */
+        cX = 0;
+        cY = 0;
     }
 
     private void Update()
     {
+
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        if (timeBtwSpawn <= 0 && stopGeneration == false)
+        if(cY < matrixHeight+2)
         {
-            Move();
-            timeBtwSpawn = startTimeBtwSpawn;
+            if (cX < matrixWidth+2)
+            {
+                if(cY == 0 || cX == 0 || cX == matrixWidth+1 || cY == matrixHeight +1)
+                {
+                    Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+                }
+                else
+                {
+                    if(matrix[cY,cX] == 0)
+                    {
+                        Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+                    }
+                    else
+                    {
+                        Instantiate(rooms[matrix[cY, cX]], new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+
+                    }
+                }
+
+                cX++;
+            }
+            else
+            {
+                cY++;
+                cX = 0;
+            }
         }
         else
         {
-            timeBtwSpawn -= Time.deltaTime;
+            stopGeneration = true;
         }
     }
 
-    private void Move()
+
+    private void GenMatrix()
     {
-
-        if (direction == 1 || direction == 2)
-        { // Move right !
-
-            if (transform.position.x < maxX)
+        for(int i = 0; i < matrixHeight; i++)
+        {
+            for(int k = 0; k < matrixWidth; k++)
             {
-                downCounter = 0;
-                Vector2 pos = new Vector2(transform.position.x + moveIncrement, transform.position.y);
-                transform.position = pos;
+                //matrix[i, k] = Random.Range(0, 5);
+                matrix[i, k] = 0;
+            }
+        }
+    }
 
-                int randRoom = Random.Range(1, 4);
-                Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
+    private void GeneratePath()
+    {
+        cY = 0;
+        cX = Random.Range(0, matrixWidth);
+        startPos = new Vector3( (cX+1) * moveIncrement, -moveIncrement, 0);
 
-                // Makes sure the level generator doesn't move left !
-                direction = Random.Range(1, 6);
-                if (direction == 3)
+        direction = GetNextMove();
+
+        while (cY < matrixHeight)
+        {
+            matrix[cY, cX] = -1;
+
+            if(direction == 1 || direction == 2) //MOVE RIGHT
+            {
+                if(cX < matrixWidth-1)
                 {
-                    direction = 1;
+                    cX++;
+
+                    direction = GetNextMove();
+
+                    if(direction == 3)
+                    {
+                        direction = 1;
+                    }
+                    else if(direction == 4)
+                    {
+                        direction = 5;
+                    }
+
                 }
-                else if (direction == 4)
+                else
                 {
                     direction = 5;
                 }
             }
-            else
+            else if(direction == 3 || direction == 4)
             {
-                direction = 5;
-            }
-        }
-        else if (direction == 3 || direction == 4)
-        { // Move left !
-
-            if (transform.position.x > minX)
-            {
-                downCounter = 0;
-                Vector2 pos = new Vector2(transform.position.x - moveIncrement, transform.position.y);
-                transform.position = pos;
-
-                int randRoom = Random.Range(1, 4);
-                Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
-
-                direction = Random.Range(3, 6);
-            }
-            else
-            {
-                direction = 5;
-            }
-
-        }
-        else if (direction == 5)
-        { // MoveDown
-            downCounter++;
-            if (transform.position.y > minY)
-            {
-                // Now I must replace the room BEFORE going down with a room that has a DOWN opening, so type 3 or 5
-                Collider2D previousRoom = Physics2D.OverlapCircle(transform.position, 1, whatIsRoom);
-                if (previousRoom.GetComponent<RoomType>().getType() != 4 && previousRoom.GetComponent<RoomType>().getType() != 2)
+                if(cX > 0)
                 {
+                    cX--;
 
-                    // My problem : if the level generation goes down TWICE in a row, there's a chance that the previous room is just 
-                    // a LRB, meaning there's no TOP opening for the other room ! 
+                    direction = Random.Range(3,6);
 
-                    if (downCounter >= 2)
+                }
+                else
+                {
+                    direction = 5;
+                }
+            }
+            else if(direction == 5)
+            {
+                cY++;
+                direction = GetNextMove();
+            }
+
+        }
+
+    }
+
+    private void VerifyPath()
+    {
+        for(int i = 0; i < matrixHeight; i++)
+        {
+            for(int k = 0; k < matrixWidth; k++)
+            {
+                if(matrix[i,k] == -1)
+                {
+                    matrix[i, k] = VerifyCell(k, i);
+                }
+            }
+        }
+    }
+
+    private int GetNextMove()
+    {
+        return Random.Range(1, 6);
+    }
+
+    private int VerifyCell(int x, int y)
+    {
+        int roomTyme = -1;
+
+        if (y == 0)
+        {
+            if (x == 0)
+            {
+                if (matrix[y, x + 1] != 0 && matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+                }
+                else if (matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+                }
+
+            }
+            else if (x == matrixWidth - 1)
+            {
+                if (matrix[y, x - 1] != 0 && matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+                }
+                else if (matrix[y, x - 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+
+                }
+            }
+            else
+            {
+                if (matrix[y, x - 1] != 0 && matrix[y, x + 1] != 0 && matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y, x - 1] != 0 && matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y, x - 1] != 0 || matrix[y, x + 1] != 0)
+                {
+                    if (matrix[y + 1, x] != 0)
                     {
-                        previousRoom.GetComponent<RoomType>().RoomDestroy();
-                        Instantiate(rooms[4], transform.position, Quaternion.identity);
+                        roomTyme = (int)Rooms.LRB;
                     }
                     else
                     {
-                        previousRoom.GetComponent<RoomType>().RoomDestroy();
-                        int randRoomDownOpening = Random.Range(2, 5);
-                        if (randRoomDownOpening == 3)
-                        {
-                            randRoomDownOpening = 2;
-                        }
-                        Instantiate(rooms[randRoomDownOpening], transform.position, Quaternion.identity);
+                        roomTyme = (int)Rooms.LR;
                     }
-
+                }
+                else if(matrix[y+1,x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
                 }
 
+            }
+        }
+        else if (y == matrixHeight - 1)
+        {
+            if (x == 0)
+            {
+                if (matrix[y, x + 1] != 0 && matrix[y - 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
+                else if (matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y - 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
 
+            }
+            else if (x == matrixWidth - 1)
+            {
+                if (matrix[y, x - 1] != 0 && matrix[y - 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
+                else if (matrix[y, x - 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y - 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
 
-                Vector2 pos = new Vector2(transform.position.x, transform.position.y - moveIncrement);
-                transform.position = pos;
-
-                // Makes sure the room we drop into has a TOP opening !
-                int randRoom = Random.Range(3, 5);
-                Instantiate(rooms[randRoom], transform.position, Quaternion.identity);
-
-                direction = Random.Range(1, 6);
-
-                Destroy(previousRoom);
-
+                }
             }
             else
             {
-                stopGeneration = true;
+                if (matrix[y, x - 1] != 0 && matrix[y, x + 1] != 0 && matrix[y - 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y, x - 1] != 0 && matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y, x - 1] != 0 || matrix[y, x + 1] != 0)
+                {
+                    if (matrix[y - 1, x] != 0)
+                    {
+                        roomTyme = (int)Rooms.LRT;
+                    }
+                    else
+                    {
+                        roomTyme = (int)Rooms.LR;
+                    }
+                }
+                else if(matrix[y-1,x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
             }
-
         }
+        else
+        {
+            if (x == 0)
+            {
+                if (matrix[y - 1, x] != 0 && matrix[y + 1, x] != 0 && matrix[y, x + 1] != 0)
+                {
+                    //Left Upper/Lower corner
+                    roomTyme = (int)Rooms.LRBT;
+
+                }
+                else if (matrix[y - 1, x] != 0 && matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRBT;
+                }
+                else if (matrix[y - 1, x] != 0 && matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
+                else if (matrix[y + 1, x] != 0 && matrix[y, x + 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+                }
+
+            }
+            else if (x == matrixWidth - 1)
+            {
+                if (matrix[y - 1, x] != 0 && matrix[y + 1, x] != 0 && matrix[y, x - 1] != 0)
+                {
+                    //Right Upper/Lower corner
+                    roomTyme = (int)Rooms.LRBT;
+
+                }
+                else if (matrix[y - 1, x] != 0 && matrix[y + 1, x] != 0)
+                {
+                    roomTyme = (int)Rooms.LRBT;
+                }
+                else if (matrix[y - 1, x] != 0 && matrix[y, x - 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LRT;
+                }
+                else if (matrix[y + 1, x] != 0 && matrix[y, x - 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LRB;
+                }
+            }
+            else
+            {
+                if (matrix[y, x + 1] != 0 && matrix[y, x - 1] != 0)
+                {
+                    roomTyme = (int)Rooms.LR;
+                }
+                else if (matrix[y, x + 1] != 0 || matrix[y, x - 1] != 0)
+                {
+                    if (matrix[y - 1, x] != 0 && matrix[y + 1, x] != 0)
+                    {
+                        roomTyme = (int)Rooms.LRBT;
+                    }
+                    else if (matrix[y - 1, x] != 0)
+                    {
+                        roomTyme = (int)Rooms.LRT;
+                    }
+                    else if (matrix[y + 1, x] != 0)
+                    {
+                        roomTyme = (int)Rooms.LRB;
+                    }
+                    else
+                    {
+                        roomTyme = (int)Rooms.LRBT;
+                    }
+
+                }
+                else
+                {
+                    roomTyme = (int)Rooms.LRBT;
+                }
+            }
+        }
+
+        return roomTyme;
+
+    }
+
+    private void FillMatrix()
+    {
+        for(int y = 0; y < matrixHeight; y++)
+        {
+            for(int x = 0; x < matrixWidth; x++)
+            {
+                if(matrix[y,x] == 0)
+                {
+                    int chance = Random.Range(0,2);
+
+                    if(chance == 1)
+                    {
+                        matrix[y, x] = Random.Range(1, 5);
+                    }
+                }
+            }
+        }
+    }
+    private void ReSizeMatrix()
+    {
+        int[,] matrixBackUp = matrix;
+
+        matrix = new int[matrixHeight + 2, matrixWidth + 2];
+
+        for(int i = 0; i < matrixHeight + 2; i++)
+        {
+            for(int k = 0; k < matrixWidth + 2; k++)
+            {
+                if(i > 0 && i < matrixHeight + 1 && k > 0 && k < matrixWidth + 1)
+                {
+                    matrix[i, k] = matrixBackUp[i - 1, k - 1];
+                }
+                else
+                {
+                    matrix[i, k] = 0;
+                }
+
+            }
+        }
+
     }
 }

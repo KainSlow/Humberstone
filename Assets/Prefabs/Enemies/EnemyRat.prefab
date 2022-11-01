@@ -45,9 +45,9 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.9584694, y: 1}
-  m_Direction: 0
+  m_Offset: {x: -0.013162468, y: -0.016423777}
+  m_Size: {x: 0.80901283, y: 0.3975781}
+  m_Direction: 1
 --- !u!1 &2800077596727501127
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 2800077596727501122}
   - component: {fileID: 2800077596727501125}
   - component: {fileID: -822408910333258745}
+  - component: {fileID: 4538767818418744493}
   m_Layer: 0
   m_Name: EnemyRat
   m_TagString: Enemy
@@ -118,9 +119,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ca6ca1f2c421b44a738b1bb2c9a80d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectorRaidus: 7
+  detectorRaidus: 5
   speed: 150
   prowlDistance: 3
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &-822408910333258745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,8 +137,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f264dbd30521c49bb5ad8319bb4f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockbackForce: 10
+  knockbackForce: 8
   disableTime: 0.3
+  deathTime: 0.8
+  lifes: 2
+--- !u!114 &4538767818418744493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800077596727501127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca574842a2a22884face733f9a9abd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2800077597903837417
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2800077597903838998}
   - component: {fileID: 2800077597903838999}
+  - component: {fileID: 4880690750303559130}
   m_Layer: 0
   m_Name: RatSprite
   m_TagString: Enemy
@@ -208,9 +227,9 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5471698, g: 0.1414382, b: 0.1414382, a: 1}
-  m_FlipX: 0
+  m_Sprite: {fileID: -2005876447, guid: d6dfcdfed590b0c42bf9c4e1f6dea980, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -219,6 +238,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &4880690750303559130
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2800077597903837417}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5f9091d6d9d2b0942bcfa79da6ab4710, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2800077598299080924
 GameObject:
   m_ObjectHideFlags: 0

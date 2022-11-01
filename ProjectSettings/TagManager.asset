@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - Attack
+  - Saltpeter
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Room
-  - 
-  - 
+  - NPC
+  - Walls
   - 
   - 
   - 

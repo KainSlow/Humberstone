@@ -8,26 +8,40 @@ public class PlayerManager : MonoBehaviour
     public event EventHandler OnClick;
     public event EventHandler OnHit;
 
-    [SerializeField] float attackCD;
+    float attackCD;
+    [SerializeField] float disableTime;
     [SerializeField] float knockbackDuration;
     [SerializeField] float knockbackForce;
+    [SerializeField] GameObject saltpeterDrop;
 
     Rigidbody2D rb;
 
-    Timer disableTimer;
-    Timer hitCD;
+    public Timer disableTimer;
+    public Timer AttackCadence;
+    public Timer hitCD;
 
     private Vector3 direction;
     private void Awake()
     {
-        OnClick += ApplyFowardForce;
+        //OnClick += ApplyFowardForce;
         OnHit += ApplyKnockBack;
+        OnHit += DropSaltpeter;
 
         rb = GetComponent<Rigidbody2D>();
-        disableTimer = new Timer(attackCD);
-        disableTimer.OnTime += EnablePlayer;
+        disableTimer = new Timer(disableTime);
+        disableTimer.OnTime += EnableMov;
+
+        attackCD = PlayerGlobals.Instance.Cadence;
+
+        AttackCadence = new Timer(attackCD);
+        AttackCadence.OnTime += EnableAim;
+
         hitCD = new Timer(knockbackDuration);
-        hitCD.OnTime += EnablePlayer;
+        hitCD.OnTime += EnableMov;
+        hitCD.OnTime += EnableAim;
+
+        UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
+
     }
 
     private void Start()
@@ -46,22 +60,36 @@ public class PlayerManager : MonoBehaviour
     {
         EventHandler handler = OnHit;
         handler?.Invoke(this, e);
+        hitCD.Start();
+        DisableAim();
+        DisableMov();
+
     }
 
 
     private void Update()
     {
+        attackCD = PlayerGlobals.Instance.Cadence;
+
         disableTimer.Update();
         
         hitCD.Update();
+
+        AttackCadence.Update();
         
     }
 
     public void DisableMov()
     {
         gameObject.GetComponent<PlayerMovement>().enabled = false;
-        gameObject.GetComponent<PlayerAim>().enabled = false;
         disableTimer.Start();
+    }
+
+
+    public void DisableAim()
+    {
+        gameObject.GetComponent<PlayerAim>().canAttack = false;
+        AttackCadence.Start();
     }
 
     private void ApplyFowardForce(object sender, EventArgs e)
@@ -75,13 +103,17 @@ public class PlayerManager : MonoBehaviour
         rb.AddForce(dir * 0.25f, ForceMode2D.Impulse);
     }
 
-    private void EnablePlayer(object sender, EventArgs e)
+    private void EnableMov(object sender, EventArgs e)
     {
         gameObject.GetComponent<PlayerMovement>().enabled = true;
-        gameObject.GetComponent<PlayerAim>().enabled = true;
         disableTimer.Stop();
     }
 
+    private void EnableAim(object sender, EventArgs e)
+    {
+        gameObject.GetComponent<PlayerAim>().canAttack = true;
+        AttackCadence.Stop();
+    }
 
     public void ApplyKnockBack(object sender, EventArgs e)
     {
@@ -91,6 +123,17 @@ public class PlayerManager : MonoBehaviour
 
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        HitScan(collision);
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        HitScan(collision);
+    }
+
+
+    private void HitScan(Collision2D collision)
     {
         if (hitCD.isActive)
         {
@@ -103,6 +146,28 @@ public class PlayerManager : MonoBehaviour
 
             OnPlayerHitted(EventArgs.Empty);
         }
+    }
+
+    private void DropSaltpeter(object sender, EventArgs e)
+    {
+        int dropQ;
+
+        if(PlayerGlobals.Instance.Saltpeter >= 2)
+        {
+            dropQ = 2;
+        }
+        else
+        {
+            dropQ = PlayerGlobals.Instance.Saltpeter;
+        }
+
+        for(int i = 0; i < dropQ;i++)
+        {
+            Instantiate(saltpeterDrop, transform.position, Quaternion.identity, null);
+        }
+
+        PlayerGlobals.Instance.DropSaltpeter(dropQ);
+
     }
 
 }

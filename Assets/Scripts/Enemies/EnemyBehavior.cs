@@ -26,31 +26,17 @@ public class EnemyBehavior : MonoBehaviour
         PlayerDetector.radius = detectorRaidus;
     }
 
-    protected virtual void MoveTowardsPoint(Vector3 targetPos)
+    protected virtual void MoveTowardsDirection(Vector3 dirTarget)
     {
-        Vector3 dirPlayer = targetPos - transform.position;
-        dirPlayer.z = 0;
-
-        rb.velocity = new Vector2(dirPlayer.x, dirPlayer.y).normalized * speed * Time.deltaTime;
-
+        rb.velocity = new Vector2(dirTarget.x, dirTarget.y).normalized * speed * Time.deltaTime;
     }
 
     protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision == null)
-        {
-            return;
-        }
-
-
-        if (collision.gameObject.CompareTag("Attack"))
-        {
-            Vector3 dir = (transform.position - player.transform.position).normalized;
-            dir.z = 0;
-
-            GetComponent<EnemyManager>().SetDir(dir);
-            GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
-        }
+        
     }
+    public virtual void DeathBehaviour()
+    {
 
+    }
 }

@@ -10,22 +10,23 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] Transform Caster;
     [SerializeField] GameObject Attack;
     private float angle;
-
-
-    Timer Cadence;
+    public bool canAttack;
 
 
     private void Awake()
     {
         pM = GetComponent<PlayerManager>();
-
+        canAttack = true;
     }
 
     private void Update()
     {
         HandleAim();
 
-        HandleShooting();
+        if (canAttack)
+        {
+            HandleShooting();
+        }
     }
     private void HandleAim()
     {
@@ -34,20 +35,48 @@ public class PlayerAim : MonoBehaviour
 
         Vector3 aimDirection = mouseWorldPos - transform.position;
         angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-        Aim.right = aimDirection;
+
+        LimitAngle();
+
+        Aim.eulerAngles = new Vector3(0f,0f,angle);
+
+        //Aim.right = aimDirection;
     }
 
     private void HandleShooting()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            GameObject gm =Instantiate<GameObject>(Attack, Caster);
+            GameObject gm = Instantiate(Attack, Caster);
             gm.transform.eulerAngles = new Vector3(0f,0f,angle);
+
+            gm.GetComponent<SpriteRenderer>().flipY = Caster.GetComponentInChildren<SpriteRenderer>().flipY;
 
             pM.OnMouseClicked(EventArgs.Empty);
             
         }
     }
 
+
+    private void LimitAngle()
+    {
+        if (angle > 20 && angle <= 90)
+        {
+            angle = 20;
+        }
+        else if (angle > 90 && angle < 160)
+        {
+            angle = 160;
+
+        }
+        else if (angle > -160 && angle < -90)
+        {
+            angle = -160;
+        }
+        else if (angle < -20 && angle >= -90)
+        {
+            angle = -20;
+        }
+    }
 
 }
