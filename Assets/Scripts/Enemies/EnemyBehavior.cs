@@ -21,7 +21,7 @@ public class EnemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         PlayerDetector.radius = detectorRaidus;
     }
@@ -30,13 +30,6 @@ public class EnemyBehavior : MonoBehaviour
     {
         rb.velocity = new Vector2(dirTarget.x, dirTarget.y).normalized * speed * Time.deltaTime;
     }
+    public virtual void DeathBehaviour() { }
 
-    protected virtual void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-    }
-    public virtual void DeathBehaviour()
-    {
-
-    }
 }

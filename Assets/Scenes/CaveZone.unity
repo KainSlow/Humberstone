@@ -451,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2961486974810203070, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.5373206
+      value: 2.7
       objectReference: {fileID: 0}
     - target: {fileID: 2961486974810203070, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -488,6 +488,10 @@ PrefabInstance:
     - target: {fileID: 2961486974810203070, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9203196630000613545, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
@@ -1112,6 +1116,22 @@ PrefabInstance:
       propertyPath: oPlayer
       value: 
       objectReference: {fileID: 915543590}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: objs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: objs.Array.data[0]
+      value: 
+      objectReference: {fileID: 8953605891647682560, guid: 050f2a9fc1fdc3943a07383c8cd94d55, type: 3}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: objs.Array.data[1]
+      value: 
+      objectReference: {fileID: 95363588261443325, guid: 00be629f0db15f0408340321f783d234, type: 3}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: objs.Array.data[2]
+      value: 
+      objectReference: {fileID: 4647234460725780252, guid: 0550b7dd3c331084e92f4c3fc51399fc, type: 3}
     - target: {fileID: 2794567990433440494, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
       propertyPath: m_RootOrder
       value: 3

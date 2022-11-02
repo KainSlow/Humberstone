@@ -19,7 +19,8 @@ public class SaltpeterBehavior : MonoBehaviour
     [SerializeField] float maxMagnitude;
     #endregion
 
-    EventHandler OnHit;
+    public EventHandler OnHit;
+
     Timer hitAnim;
     Timer hitInterval;
 
@@ -31,12 +32,11 @@ public class SaltpeterBehavior : MonoBehaviour
         hitInterval = new Timer((float)(animTime / animIntervals));
         hitInterval.ActivateLooping();
 
-        hitAnim.OnTime += DropSaltpeter;
+        OnHit += DropSaltpeter;
         hitAnim.OnTime += Death;
         hitAnim.OnTime += StopInterval;
 
         hitInterval.OnTime += ChangeDir;
-
     }
 
     // Update is called once per frame
@@ -110,10 +110,6 @@ public class SaltpeterBehavior : MonoBehaviour
             }
 
             maxHits--;
-        }
-        else
-        {
-
         }
     }
 

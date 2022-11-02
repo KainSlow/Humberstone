@@ -12,7 +12,6 @@ public class PlayerAim : MonoBehaviour
     private float angle;
     public bool canAttack;
 
-
     private void Awake()
     {
         pM = GetComponent<PlayerManager>();
@@ -48,6 +47,7 @@ public class PlayerAim : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             GameObject gm = Instantiate(Attack, Caster);
+
             gm.transform.eulerAngles = new Vector3(0f,0f,angle);
 
             gm.GetComponent<SpriteRenderer>().flipY = Caster.GetComponentInChildren<SpriteRenderer>().flipY;

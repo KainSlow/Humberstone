@@ -21,6 +21,13 @@ public class ClockManager : MonoBehaviour
         currentScene = SceneManager.GetActiveScene();
         Speed = 180f / PlayerGlobals.Instance.maxDayTime;
         currentAngle = 0f;
+
+        if (currentScene.name == "TownNight")
+        {
+            secondHand.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+            PlayerGlobals.Instance.SetNightTime();
+        }
+
     }
 
     // Update is called once per frame
@@ -42,11 +49,7 @@ public class ClockManager : MonoBehaviour
             }
 
         }
-        else if (currentScene.name == "TownNight")
-        {
-            secondHand.transform.eulerAngles = new Vector3(0f, 0f, 180f);
-            PlayerGlobals.Instance.SetNightTime();
-        }
+        
     }
 
     private void MoveSecondHand()

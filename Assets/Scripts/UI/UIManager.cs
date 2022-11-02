@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject popUp;
     [SerializeField] Button[] popUpButtons;
 
+    [SerializeField] Slider cdSlide;
+
     TextMeshProUGUI[] textMP;
     Slider hungerSlide;
     void Start()
@@ -27,6 +29,7 @@ public class UIManager : MonoBehaviour
             endWorkButton.gameObject.SetActive(true);
             popUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Estás seguro/a?";
         }
+
 
     }
 
@@ -47,6 +50,23 @@ public class UIManager : MonoBehaviour
         hungerSlide.value = PlayerGlobals.Instance.Hunger / 5f;
         textMP[1].text = PlayerGlobals.Instance.Tokens.ToString("0.0");
         textMP[3].text = "Día: " + PlayerGlobals.Instance.Day.ToString();
+
+
+        GameObject oPlayer = GameObject.Find("Player");
+        PlayerManager pM = oPlayer.GetComponent<PlayerManager>();
+
+        if (pM.AttackCadence.isActive)
+        {
+            cdSlide.gameObject.SetActive(true);
+            cdSlide.value = pM.AttackCadence.CurrentTime / pM.AttackCadence.EndTime;
+            cdSlide.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(oPlayer.transform.position + Vector3.down * 0.6f);
+        }
+        else
+        {
+            cdSlide.gameObject.SetActive(false);
+        }
+
+
     }
 
 
@@ -58,10 +78,19 @@ public class UIManager : MonoBehaviour
 
     private void Confirm()
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+
         Time.timeScale = 1f;
-        if(SceneManager.GetActiveScene().name != "TownNight")
+        if(currentScene.name != "TownNight")
         {
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+            if(currentScene.name == "Town")
+            {
+                SceneManager.LoadSceneAsync("CaveZone");
+            }
+            else if(currentScene.name == "CaveZone")
+            {
+                SceneManager.LoadSceneAsync("WorkEnd");
+            }
         }
         else
         {

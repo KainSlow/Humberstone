@@ -9,6 +9,9 @@ public class PlayerGlobals
 
     public EventHandler OnBuy;
     public EventHandler OnNewDay;
+
+    public const float TCONSTANT = 1.2f;
+
     public int ShovelLVL { get; private set; }
     public int MaxShovelLVL { get; private set; }
     public int BagLVL { get; private set; }
@@ -23,7 +26,10 @@ public class PlayerGlobals
     public float SuspicionLVL { get; private set; }
     public float maxDayTime { get; private set; }
     public float currentTime { get; private set; }
-    public float Day { get; private set; }
+    public int Day { get; private set; }
+    public int DayFee { get; private set; }
+
+    public int SaltpeterNeeded { get; private set; }
 
     public bool[] isObjCollected;
 
@@ -38,9 +44,10 @@ public class PlayerGlobals
         OnBuy += SetCadence;
         OnBuy += SetMaxSaltpeter;
 
-        OnNewDay += ReSetTime;
         OnNewDay += AddDay;
         OnNewDay += IncreaseHunger;
+        OnNewDay += ReSetTime;
+
 
     }
 
@@ -65,13 +72,17 @@ public class PlayerGlobals
 
     private void SetDefaultValues()
     {
-        isObjCollected[0] = true;
+        //Debug
+
+        SaltpeterNeeded = 30;
 
         maxDayTime = 60f;
 
         currentTime = maxDayTime;
 
-        Day = 1f;
+        Day = 1;
+
+        DayFee = 0;
         Inflation = 1f;
         SuspicionLVL = 1f;
 
@@ -82,13 +93,23 @@ public class PlayerGlobals
 
         Hunger = 3;
 
-        Tokens = 1000f;
+        Tokens = 0f;
         Saltpeter = 0;
 
         Speed = Hunger * 0.25f + 0.25f;
         Cadence = 2f - 0.25f * ShovelLVL;
         maxSaltpeter = 10 + 5 * BagLVL;
 
+    }
+
+    public void SetObjCollected(int objType)
+    {
+        isObjCollected[objType] = true;
+    }
+
+    public void NeedNoSaltpeter()
+    {
+        SaltpeterNeeded = 0;
     }
 
     private void IncreaseHunger(object sender, EventArgs e)
@@ -128,6 +149,11 @@ public class PlayerGlobals
     public void DecreaseTokens(float value)
     {
         Tokens -= value;
+    }
+
+    public void DecreaseSaltpeter(int value)
+    {
+        Saltpeter -= value;
     }
 
     #region Saltpeter Helpers

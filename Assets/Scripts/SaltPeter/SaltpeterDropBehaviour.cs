@@ -44,17 +44,45 @@ public class SaltpeterDropBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !EndTimer.isActive)
+        if (!EndTimer.isActive)
         {
-            if(PlayerGlobals.Instance.Saltpeter < PlayerGlobals.Instance.maxSaltpeter)
+            OnTrigger(collision);
+        }
+
+        if (collision.CompareTag("Wall"))
+        {
+            EndTimer.Stop(true);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (!EndTimer.isActive)
+        {
+            OnTrigger(collision);
+        }
+
+        if (collision.CompareTag("Wall"))
+        {
+            EndTimer.Stop(true);
+        }
+    }
+
+
+    private void OnTrigger(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            if (PlayerGlobals.Instance.Saltpeter < PlayerGlobals.Instance.maxSaltpeter)
             {
                 PlayerGlobals.Instance.AddSaltpeter();
                 Destroy(gameObject);
             }
         }
-        if (collision.CompareTag("Wall"))
+        if (collision.CompareTag("Enemy") && collision.name == "Collider" && collision.transform.parent.name.Contains("EnemyWorker"))
         {
-            EndTimer.Stop(true);
+            collision.transform.parent.GetComponent<EnemyWManager>().OnDropCollected(EventArgs.Empty);
+            Destroy(gameObject);
         }
 
     }

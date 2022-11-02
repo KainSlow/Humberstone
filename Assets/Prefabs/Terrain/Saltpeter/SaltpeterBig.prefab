@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8822428516669631097}
   - component: {fileID: 8822428516669631096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sprite
   m_TagString: Saltpeter
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 8822428517513192485}
   - component: {fileID: 8822428517513192484}
   - component: {fileID: 8822428517513192483}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SaltpeterBig
   m_TagString: Saltpeter
   m_Icon: {fileID: 0}
@@ -169,7 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8822428517796383811}
   - component: {fileID: 8822428517796383810}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Collider
   m_TagString: Saltpeter
   m_Icon: {fileID: 0}

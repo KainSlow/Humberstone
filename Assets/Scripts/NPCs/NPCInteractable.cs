@@ -42,14 +42,15 @@ public class NPCInteractable : MonoBehaviour
 
     private void SetText()
     {
-        string[] txtData = textData.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
-
-        int rand = Random.Range(0, txtData.Length);
-
+        string[] txtData = textData.text.Split(new string[] {"\n" }, System.StringSplitOptions.None);
         TextMP[0].text = Name;
+
+        int rand;
+        
+        rand = Random.Range(0, txtData.Length);
         TextMP[1].text = txtData[rand];
 
-        if (txtData[rand].Equals(""))
+        if (txtData[rand].Equals("") || txtData[rand].Equals(" ") || txtData[rand].Equals("\n") || txtData[rand] == null)
         {
             SetText();
         }

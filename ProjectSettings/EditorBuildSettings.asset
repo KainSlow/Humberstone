@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TownNight.unity
     guid: 87123386c695d8b48a069d3f8e2709ab
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: 3ca19a38dd8459a4aaf4d8cc986028c2
   m_configObjects: {}

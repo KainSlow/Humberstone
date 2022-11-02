@@ -14,6 +14,8 @@ public class LevelGeneration : MonoBehaviour
     [SerializeField] int matrixWidth;
     [SerializeField] int matrixHeight;
 
+    [SerializeField] GameObject[] objs;
+
     enum Rooms
     {
         Closed,
@@ -33,10 +35,14 @@ public class LevelGeneration : MonoBehaviour
     private  int cX;
     private  int cY;
 
+    bool genObj;
+    int ObjPosX;
+    int ObjPosY;
+
+
     private void Start()
     {
         matrix = new int[matrixHeight, matrixWidth];
-
 
         GenMatrix();
         GeneratePath();
@@ -47,51 +53,57 @@ public class LevelGeneration : MonoBehaviour
         oPlayer.transform.position = startPos;
         oCam.transform.position = startPos;
 
-
-        /*
-        string txt = "";
-        for(int i = 0; i < matrixHeight; i++)
-        {
-            for(int k = 0; k< matrixWidth; k++)
-            {
-                txt += matrix[i, k] + ", ";
-            }
-            txt += "\n";
-        }
-
-        Debug.Log(txt);
-        */
         cX = 0;
         cY = 0;
+
+
+        if (PlayerGlobals.Instance.Day % 2 == 0)
+        {
+            genObj = true;
+        }
     }
 
     private void Update()
     {
-
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        
 
-        if(cY < matrixHeight+2)
+
+        if (cY < matrixHeight+2)
         {
             if (cX < matrixWidth+2)
             {
                 if(cY == 0 || cX == 0 || cX == matrixWidth+1 || cY == matrixHeight +1)
                 {
-                    Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+                    Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
                 }
                 else
                 {
                     if(matrix[cY,cX] == 0)
                     {
-                        Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+                        Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
                     }
                     else
                     {
-                        Instantiate(rooms[matrix[cY, cX]], new Vector3(cX * moveIncrement, -cY * moveIncrement, 0), Quaternion.identity, null);
+                        Instantiate(rooms[matrix[cY, cX]], new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
 
+                        if (genObj)
+                        {
+                            int objType = 0;
+                            for(int i = 0; i < 3; i++)
+                            {
+                                if(PlayerGlobals.Instance.isObjCollected[i] == false)
+                                {
+                                    objType = i;
+                                    break;
+                                }
+                            }
+                            Instantiate(objs[objType], new Vector3( (ObjPosX * moveIncrement), (-ObjPosY * moveIncrement), 0f), Quaternion.identity, null);
+                            genObj = false;
+                        }
                     }
                 }
 
@@ -130,9 +142,17 @@ public class LevelGeneration : MonoBehaviour
 
         direction = GetNextMove();
 
+
         while (cY < matrixHeight)
         {
             matrix[cY, cX] = -1;
+
+            if(cY == matrixHeight/2)
+            {
+                ObjPosX = cX + 1;
+                ObjPosY = cY + 1;
+            }
+
 
             if(direction == 1 || direction == 2) //MOVE RIGHT
             {

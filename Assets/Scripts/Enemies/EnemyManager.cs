@@ -8,8 +8,8 @@ public class EnemyManager : MonoBehaviour
     // Start is called before the first frame update
 
     public EventHandler OnHit;
-    Rigidbody2D rb;
-    Timer disableTimer;
+    protected Rigidbody2D rb;
+    public Timer disableTimer;
     public Timer deathTimer;
     [SerializeField] float knockbackForce;
     [SerializeField] float disableTime;
@@ -19,7 +19,7 @@ public class EnemyManager : MonoBehaviour
 
     Vector3 direction;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sr = GetComponentInChildren<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -35,24 +35,24 @@ public class EnemyManager : MonoBehaviour
         deathTimer.OnTime += Death;
     }
 
-    private void Damage(object sender, EventArgs e)
+    protected void Damage(object sender, EventArgs e)
     {
         lifes--;
     }
 
-    private void Death(object sender, EventArgs e)
+    protected void Death(object sender, EventArgs e)
     {
         Destroy(gameObject);
     }
 
-    private void isDeath(object sender, EventArgs e)
+    protected void isDeath(object sender, EventArgs e)
     {
         if(lifes <= 0) {
             deathTimer.Start();
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         disableTimer.Update();
         if (disableTimer.isActive)
@@ -73,8 +73,6 @@ public class EnemyManager : MonoBehaviour
         {
             GetComponent<EnemyBehavior>().DeathBehaviour();
         }
-
-
     }
 
     public virtual void OnEnemyHitted(EventArgs e)
@@ -85,18 +83,19 @@ public class EnemyManager : MonoBehaviour
 
     public void SetDir(Vector3 dir) => direction = dir;
 
-    private void DisableMov(object sender, EventArgs e)
+    protected void DisableMov(object sender, EventArgs e)
     {
         GetComponent<EnemyBehavior>().enabled = false;
         disableTimer.Start();
     }
 
-    private void EnableMov(object sender, EventArgs e)
+    protected void EnableMov(object sender, EventArgs e)
     {
+        rb.velocity = Vector2.zero;
         GetComponent<EnemyBehavior>().enabled = true;
     }
 
-    private void ApplyKnockBack(object sender, EventArgs e)
+    protected void ApplyKnockBack(object sender, EventArgs e)
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(direction * knockbackForce,ForceMode2D.Impulse);

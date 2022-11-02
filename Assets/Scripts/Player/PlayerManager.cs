@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public Timer AttackCadence;
     public Timer hitCD;
 
-    private Vector3 direction;
+    public Vector3 direction;
     private void Awake()
     {
         //OnClick += ApplyFowardForce;
@@ -156,6 +156,7 @@ public class PlayerManager : MonoBehaviour
 
             OnPlayerHitted(EventArgs.Empty);
         }
+        
     }
 
     private void DropSaltpeter(object sender, EventArgs e)
