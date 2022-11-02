@@ -10,7 +10,7 @@ public class PlayerGlobals
     public EventHandler OnBuy;
     public EventHandler OnNewDay;
 
-    public const float TCONSTANT = 1.2f;
+    public const float TCONSTANT = 1.5f;
 
     public int ShovelLVL { get; private set; }
     public int MaxShovelLVL { get; private set; }
@@ -21,9 +21,11 @@ public class PlayerGlobals
     public float Tokens { get; private set; }
     public int Saltpeter { get; private set; }
     public float Hunger { get; private set; }
+    public int MaxHunger {get;private set;}
     public int maxSaltpeter { get; private set; }
     public float Inflation { get; private set; }
     public float SuspicionLVL { get; private set; }
+    public float MaxSuspicion { get; private set; }
     public float maxDayTime { get; private set; }
     public float currentTime { get; private set; }
     public int Day { get; private set; }
@@ -47,8 +49,8 @@ public class PlayerGlobals
         OnNewDay += AddDay;
         OnNewDay += IncreaseHunger;
         OnNewDay += ReSetTime;
-
-
+        OnNewDay += IncreaseInflation;
+        OnNewDay += IncreaseFee;
     }
 
     public static PlayerGlobals Instance
@@ -70,7 +72,7 @@ public class PlayerGlobals
         handler?.Invoke(this, e);
     }
 
-    private void SetDefaultValues()
+    public void SetDefaultValues()
     {
         //Debug
 
@@ -85,15 +87,17 @@ public class PlayerGlobals
         DayFee = 0;
         Inflation = 1f;
         SuspicionLVL = 1f;
+        MaxSuspicion = 6f;
 
-        MaxShovelLVL = 5;
+        MaxShovelLVL = 7;
         MaxBagLVL = 10;
         ShovelLVL = 1;
         BagLVL = 1;
 
         Hunger = 3;
+        MaxHunger = 6;
 
-        Tokens = 0f;
+        Tokens = 0;
         Saltpeter = 0;
 
         Speed = Hunger * 0.25f + 0.25f;
@@ -117,6 +121,28 @@ public class PlayerGlobals
         if(Hunger > 1)
         {
             Hunger--;
+        }
+    }
+    private void IncreaseFee(object sender, EventArgs e)
+    {
+        DayFee = (int)(Day/2) * 3;
+    }
+
+    private void IncreaseInflation(object sender, EventArgs e)
+    {
+        Inflation *= 1.05f;
+    }
+
+    public void IncreaseSuspicion()
+    {
+        SuspicionLVL++;
+    }
+
+    public void DecreaseSuspicion()
+    {
+        if(SuspicionLVL > 1)
+        {
+            SuspicionLVL--;
         }
     }
 
@@ -161,13 +187,7 @@ public class PlayerGlobals
     {
         Saltpeter++;
     }
-    public void TransformSaltpeter(int Quantity)
-    {
-        //Transform to Tokens
-        Tokens += Quantity * 3.5f;
-        DropSaltpeter(Quantity);
 
-    }
     public void DropSaltpeter(int value)
     {
         Saltpeter -= value;
@@ -185,7 +205,7 @@ public class PlayerGlobals
     }
     private void SetMaxSaltpeter(object sender, EventArgs e)
     {
-        maxSaltpeter = 10 + 5 * BagLVL;
+        maxSaltpeter = 15 + 10 * BagLVL;
     }
 
     private void ReSetTime(object sender, EventArgs e)

@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cSaltpeter: {fileID: 3439182367795739634, guid: ff0e3be1e472e294687a45c1f2ca0177, type: 3}
-  dropQuantity: 1
+  dropQuantity: 2
   maxHits: 2
   animTime: 0.5
   animSpeed: 1

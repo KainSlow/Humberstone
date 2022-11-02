@@ -31,6 +31,13 @@ public class UIManager : MonoBehaviour
         }
 
 
+        Debug.Log(PlayerGlobals.Instance.SuspicionLVL);
+
+        if(PlayerGlobals.Instance.SuspicionLVL >= PlayerGlobals.Instance.MaxSuspicion && SceneManager.GetActiveScene().name == "Town")
+        {
+            PlayerGlobals.Instance.SetDefaultValues();
+            SceneManager.LoadSceneAsync("GameLost");
+        }
     }
 
     // Update is called once per frame
@@ -47,7 +54,7 @@ public class UIManager : MonoBehaviour
         }
 
         textMP[0].text = PlayerGlobals.Instance.Saltpeter + "/" + PlayerGlobals.Instance.maxSaltpeter;
-        hungerSlide.value = PlayerGlobals.Instance.Hunger / 5f;
+        hungerSlide.value = PlayerGlobals.Instance.Hunger / PlayerGlobals.Instance.MaxHunger;
         textMP[1].text = PlayerGlobals.Instance.Tokens.ToString("0.0");
         textMP[3].text = "Día: " + PlayerGlobals.Instance.Day.ToString();
 

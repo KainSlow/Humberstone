@@ -30,8 +30,7 @@ public class NPCVInteractable : NPCInteractable
 
         closeButton.onClick.AddListener(DeActivate);
 
-        buyButtons[0].onClick.AddListener(SmallBuy);
-        buyButtons[1].onClick.AddListener(BigBuy);
+        
 
     }
 
@@ -41,25 +40,23 @@ public class NPCVInteractable : NPCInteractable
         if (!isInteracting)
         {
             isInteracting = true;
-            Shop.GetComponentInChildren<TextMeshProUGUI>().text = titletxt;
-
-            currenTitle = Shop.GetComponentInChildren<TextMeshProUGUI>().text;
-
-
+            currenTitle = titletxt;
+            Shop.GetComponentInChildren<TextMeshProUGUI>().text = currenTitle;
             SetImages();
             SetPrices();
             Shop.SetActive(true);
-
             GameObject.Find("CameraHolder").GetComponent<CameraMov>().enabled = false;
+            buyButtons[0].onClick.AddListener(SmallBuy);
+            buyButtons[1].onClick.AddListener(BigBuy);
 
         }
+
     }
 
     private void SetImages()
     {
         if (currenTitle == "Herrería")
         {
-
             shopImages[0].sprite = Resources.Load<Sprite>("ShovelIco");
             shopImages[1].sprite = Resources.Load<Sprite>("BagIco");
 
@@ -75,9 +72,8 @@ public class NPCVInteractable : NPCInteractable
     {
         if (currenTitle == "Herrería")
         {
-
-            smallCost = (int)(10 * PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation);
-            bigCost = (int)(20 * PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation);
+            smallCost = (int)(3 * PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation);
+            bigCost = (int)(7 * PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation);
         }
         else if (currenTitle == "Pulpería")
         {
@@ -91,12 +87,11 @@ public class NPCVInteractable : NPCInteractable
 
     private void SmallBuy()
     {
+        Debug.Log(currenTitle);
         if(PlayerGlobals.Instance.Tokens >= smallCost)
         {
             if (currenTitle == "Herrería")
             {
-
-
                 if (PlayerGlobals.Instance.ShovelLVL < PlayerGlobals.Instance.MaxShovelLVL)
                 {
                     PlayerGlobals.Instance.BuyShovelLvl();
@@ -107,7 +102,7 @@ public class NPCVInteractable : NPCInteractable
             else if (currenTitle == "Pulpería")
             {
 
-                if (PlayerGlobals.Instance.Hunger < 5)
+                if (PlayerGlobals.Instance.Hunger < PlayerGlobals.Instance.MaxHunger)
                 {
                     PlayerGlobals.Instance.BuyFood();
                     Buy(smallCost);
@@ -121,7 +116,7 @@ public class NPCVInteractable : NPCInteractable
     {
         PlayerGlobals.Instance.DecreaseTokens(cost);
         PlayerGlobals.Instance.OnItemBought(EventArgs.Empty);
-        SetPrices();
+        SetPrices(); 
     }
 
     private void BigBuy()
@@ -138,7 +133,7 @@ public class NPCVInteractable : NPCInteractable
             }
             else if (currenTitle == "Pulpería")
             {
-                if(PlayerGlobals.Instance.Hunger < 5)
+                if(PlayerGlobals.Instance.Hunger < PlayerGlobals.Instance.MaxHunger)
                 {
                     PlayerGlobals.Instance.RefillFood();
                     Buy(bigCost);
@@ -150,6 +145,9 @@ public class NPCVInteractable : NPCInteractable
 
     public override void DeActivate()
     {
+        buyButtons[0].onClick.RemoveAllListeners();
+        buyButtons[1].onClick.RemoveAllListeners();
+
         isInteracting = false;
         Shop.SetActive(false);
     }

@@ -38,7 +38,7 @@ public class EndWorkUI : MonoBehaviour
         fee.text = PlayerGlobals.Instance.DayFee.ToString();
         day.text = "Día:\n" + PlayerGlobals.Instance.Day;
 
-        convertQ = PlayerGlobals.Instance.DayFee;
+        convertQ = PlayerGlobals.Instance.Saltpeter;
         tokensTotal.text = Convert().ToString("0.00");
 
     }
@@ -48,6 +48,16 @@ public class EndWorkUI : MonoBehaviour
         saltpeterQ.text = convertQ + "/" + PlayerGlobals.Instance.Saltpeter;
         totalTokens = Convert();
         tokensTotal.text = totalTokens.ToString("0.00");
+
+        if(convertQ < PlayerGlobals.Instance.DayFee)
+        {
+            saltpeterQ.color = Color.red;
+        }
+        else
+        {
+            saltpeterQ.color = Color.white;
+        }
+
     }
 
     private float Convert()
@@ -62,19 +72,19 @@ public class EndWorkUI : MonoBehaviour
 
     private void MinSaltpeter()
     {
-        convertQ = PlayerGlobals.Instance.DayFee;
+        convertQ = 0;
     }
 
     private void AddSaltpeter()
     {
-        if(convertQ < PlayerGlobals.Instance.Saltpeter)
+        if (convertQ < PlayerGlobals.Instance.Saltpeter)
         {
             convertQ++;
         }
     }
     private void SubSaltpeter()
     {
-        if(convertQ > 0)
+        if (convertQ > 0)
         {
             convertQ--;
         }
@@ -91,6 +101,7 @@ public class EndWorkUI : MonoBehaviour
     private void NightTown()
     {
         Concrete();
+        PlayerGlobals.Instance.IncreaseSuspicion();
         SceneManager.LoadSceneAsync("TownNight");
 
     }
@@ -98,6 +109,15 @@ public class EndWorkUI : MonoBehaviour
 
     private void Concrete()
     {
+
+        if(convertQ < PlayerGlobals.Instance.DayFee)
+        {
+            PlayerGlobals.Instance.IncreaseSuspicion();
+        }
+        else
+        {
+            PlayerGlobals.Instance.DecreaseSuspicion();
+        }
 
         PlayerGlobals.Instance.IncreaseTokens(totalTokens);
         PlayerGlobals.Instance.DecreaseSaltpeter(convertQ);
