@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] Button endWorkButton;
@@ -24,7 +25,7 @@ public class UIManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "CaveZone")
         {
             endWorkButton.gameObject.SetActive(true);
-            popUp.GetComponentInChildren<TextMeshProUGUI>().text = "Are you sure?";
+            popUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Estás seguro/a?";
         }
 
     }
@@ -45,7 +46,7 @@ public class UIManager : MonoBehaviour
         textMP[0].text = PlayerGlobals.Instance.Saltpeter + "/" + PlayerGlobals.Instance.maxSaltpeter;
         hungerSlide.value = PlayerGlobals.Instance.Hunger / 5f;
         textMP[1].text = PlayerGlobals.Instance.Tokens.ToString("0.0");
-        textMP[3].text = "Day: " + PlayerGlobals.Instance.Day.ToString();
+        textMP[3].text = "Día: " + PlayerGlobals.Instance.Day.ToString();
     }
 
 
@@ -58,8 +59,15 @@ public class UIManager : MonoBehaviour
     private void Confirm()
     {
         Time.timeScale = 1f;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        if(SceneManager.GetActiveScene().name != "TownNight")
+        {
+            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+            SceneManager.LoadSceneAsync("Town");
+            PlayerGlobals.Instance.OnDayChanged(EventArgs.Empty);
+        }
     }
 
     private void Cancel()

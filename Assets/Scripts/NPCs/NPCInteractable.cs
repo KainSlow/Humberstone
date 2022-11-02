@@ -5,23 +5,21 @@ using TMPro;
 
 public class NPCInteractable : MonoBehaviour
 {
-    [SerializeField] GameObject DialogBox;
-    [SerializeField] string Name;
-    CanvasRenderer CR;
-    TextMeshProUGUI[] TextMP;
+    [SerializeField] private GameObject DialogBox;
+    [SerializeField] protected string Name;
 
+    [SerializeField] private GameObject SpecialBox;
+
+    TextMeshProUGUI[] TextMP;
     [SerializeField] TextAsset textData;
 
-    bool isInteracting;
+    protected bool isInteracting;
 
-    private void Start()
+    protected virtual void Start()
     {
-
         TextMP = DialogBox.GetComponentsInChildren<TextMeshProUGUI>();
         isInteracting = false;
-        CR = DialogBox.GetComponent<CanvasRenderer>();
         GetComponentInChildren<TextMeshPro>().text = Name;
-
     }
 
 
@@ -31,6 +29,11 @@ public class NPCInteractable : MonoBehaviour
         {
             isInteracting = true;
             DialogBox.SetActive(true);
+
+            if(Name == "Antonio")
+            {
+                SpecialBox.SetActive(true);
+            }
 
         }
         SetText();
@@ -46,7 +49,6 @@ public class NPCInteractable : MonoBehaviour
         TextMP[0].text = Name;
         TextMP[1].text = txtData[rand];
 
-
         if (txtData[rand].Equals(""))
         {
             SetText();
@@ -55,10 +57,15 @@ public class NPCInteractable : MonoBehaviour
     }
 
 
-    public void DeActivate()
+    public virtual void DeActivate()
     {
         isInteracting = false;
         DialogBox.SetActive(false);
+
+        if (Name == "Antonio")
+        {
+            SpecialBox.SetActive(false);
+        }
     }
 
 

@@ -42,6 +42,9 @@ public class PlayerManager : MonoBehaviour
 
         UnityEngine.Random.InitState(System.DateTime.Now.Millisecond);
 
+        PlayerGlobals.Instance.OnBuy += UpdateAttackCd;
+
+
     }
 
     private void Start()
@@ -66,10 +69,17 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    private void UpdateAttackCd(object sender, EventArgs e)
+    {
+        attackCD = PlayerGlobals.Instance.Cadence;
+        AttackCadence.SetCoolDown(attackCD);
+    }
+        
+
 
     private void Update()
     {
-        attackCD = PlayerGlobals.Instance.Cadence;
+        
 
         disableTimer.Update();
         

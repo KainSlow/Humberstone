@@ -10,7 +10,9 @@ public class PlayerGlobals
     public EventHandler OnBuy;
     public EventHandler OnNewDay;
     public int ShovelLVL { get; private set; }
+    public int MaxShovelLVL { get; private set; }
     public int BagLVL { get; private set; }
+    public int MaxBagLVL { get; private set; }
     public float Speed { get; private set; }
     public float Cadence { get; private set; }
     public float Tokens { get; private set; }
@@ -18,14 +20,18 @@ public class PlayerGlobals
     public float Hunger { get; private set; }
     public int maxSaltpeter { get; private set; }
     public float Inflation { get; private set; }
-
+    public float SuspicionLVL { get; private set; }
     public float maxDayTime { get; private set; }
     public float currentTime { get; private set; }
     public float Day { get; private set; }
 
+    public bool[] isObjCollected;
 
     private PlayerGlobals()
     {
+
+        isObjCollected = new bool[3];
+
         SetDefaultValues();
 
         OnBuy += SetSpeed;
@@ -59,19 +65,24 @@ public class PlayerGlobals
 
     private void SetDefaultValues()
     {
+        isObjCollected[0] = true;
+
         maxDayTime = 60f;
 
         currentTime = maxDayTime;
 
         Day = 1f;
         Inflation = 1f;
+        SuspicionLVL = 1f;
 
+        MaxShovelLVL = 5;
+        MaxBagLVL = 10;
         ShovelLVL = 1;
-        BagLVL = 0;
+        BagLVL = 1;
 
         Hunger = 3;
 
-        Tokens = 0f;
+        Tokens = 1000f;
         Saltpeter = 0;
 
         Speed = Hunger * 0.25f + 0.25f;
@@ -88,10 +99,26 @@ public class PlayerGlobals
         }
     }
 
-    private void FillHunger(object sender, EventArgs e)
+    public void BuyShovelLvl()
     {
-
+        ShovelLVL++;
     }
+    public void BuyBagLVL()
+    {
+        BagLVL++;
+    }
+
+
+    public void BuyFood()
+    {
+        Hunger++;
+    }
+
+    public void RefillFood()
+    {
+        Hunger = 5;
+    }
+
 
     public void IncreaseTokens(float value)
     {
@@ -140,13 +167,18 @@ public class PlayerGlobals
         currentTime = maxDayTime;
     }
 
+
+    public void SetNightTime()
+    {
+        currentTime = 0f;
+    }
+
     private void AddDay(object sender, EventArgs e)
     {
         Day++;
     }
 
     #endregion
-
 
     public void UpdateTime()
     {

@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour
     }
     void Update()
     {
+        GetComponent<SpriteRenderer>().flipY = GetComponentInParent<SpriteRenderer>().flipY;
+
         lifeSpan.Update();
     }
     private void Death(object sender, EventArgs e)

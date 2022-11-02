@@ -16,7 +16,6 @@ public class PlayerInteract : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            
             if (col != null)
             {
                 if (col.transform.parent != null)
@@ -25,7 +24,20 @@ public class PlayerInteract : MonoBehaviour
                     isInteracting = true;
                     npcInt.Interact();
 
+                    if(npcInt.transform.position.x > transform.position.x)
+                    {
+                        npcInt.GetComponent<SpriteRenderer>().flipX = true;
+                    }
+                    else
+                    {
+                        npcInt.GetComponent<SpriteRenderer>().flipX = false;
+                    }
+
+
                     lastNPC = npcInt;
+
+                    GameObject.Find("CameraHolder").GetComponent<CameraMov>().enabled = false;
+
                 }
             }
         }
@@ -33,6 +45,7 @@ public class PlayerInteract : MonoBehaviour
 
         if(col == null && isInteracting)
         {
+            GameObject.Find("CameraHolder").GetComponent<CameraMov>().enabled = true;
             lastNPC.DeActivate();
         }
 

@@ -14,7 +14,8 @@ public class ButtonManager : MonoBehaviour
     {
         buttons[0].onClick.AddListener(Play);
         buttons[1].onClick.AddListener(HTP);
-        buttons[2].onClick.AddListener(Exit);
+        buttons[2].onClick.AddListener(HTP);
+        buttons[3].onClick.AddListener(Exit);
     }
 
     private void Play()
@@ -24,6 +25,11 @@ public class ButtonManager : MonoBehaviour
     private void HTP()
     {
         SceneManager.LoadScene("Tutorial");
+    }
+
+    private void About()
+    {
+        SceneManager.LoadScene("About");
     }
 
     private void Exit()

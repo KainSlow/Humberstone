@@ -28,10 +28,10 @@ public class ClockManager : MonoBehaviour
     {
         time.text = (PlayerGlobals.Instance.currentTime).ToString("0") + "s";
 
-        if(currentScene.name == "CaveZone")
+        if (currentScene.name == "CaveZone")
         {
 
-            if(PlayerGlobals.Instance.currentTime > 0)
+            if (PlayerGlobals.Instance.currentTime > 0)
             {
                 PlayerGlobals.Instance.UpdateTime();
                 MoveSecondHand();
@@ -40,7 +40,12 @@ public class ClockManager : MonoBehaviour
             {
                 SceneManager.LoadScene("WorkEnd");
             }
-            
+
+        }
+        else if (currentScene.name == "TownNight")
+        {
+            secondHand.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+            PlayerGlobals.Instance.SetNightTime();
         }
     }
 
