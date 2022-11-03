@@ -163,7 +163,7 @@ public class PlayerGlobals
 
     public void RefillFood()
     {
-        Hunger = 5;
+        Hunger = MaxHunger;
     }
 
 

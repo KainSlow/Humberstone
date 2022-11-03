@@ -120,8 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectorRaidus: 5
-  speed: 150
-  prowlDistance: 3
+  speed: 0.8
   whatIsWall:
     serializedVersion: 2
     m_Bits: 256

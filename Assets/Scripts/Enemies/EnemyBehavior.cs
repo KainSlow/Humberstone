@@ -28,7 +28,8 @@ public class EnemyBehavior : MonoBehaviour
 
     protected virtual void MoveTowardsDirection(Vector3 dirTarget)
     {
-        rb.velocity = new Vector2(dirTarget.x, dirTarget.y).normalized * speed * Time.deltaTime;
+        rb.velocity = new Vector2(dirTarget.x, dirTarget.y).normalized * speed * 200 * Time.deltaTime;
+
     }
     public virtual void DeathBehaviour() { }
 

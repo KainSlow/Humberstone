@@ -14,6 +14,15 @@ public class PlayerInteract : MonoBehaviour
     {
         Collider2D col = Physics2D.OverlapCircle(transform.position, interactRange, NPCLayer.value);
 
+        if(col != null && col.gameObject.GetComponentInParent<NPCInteractable>() != null)
+        {
+            GameObject.Find("PlayerStats").GetComponent<UIManager>().canInteract = true;
+        }
+        else if(col == null)
+        {
+            GameObject.Find("PlayerStats").GetComponent<UIManager>().canInteract = false;
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (col != null)

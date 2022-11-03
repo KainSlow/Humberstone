@@ -13,6 +13,9 @@ public class PlayerAttack : MonoBehaviour
         lifeSpan.OnTime += Death;
     }
 
+    bool SalpeterHitted;
+    bool EnemyHitted;
+
     private void Start()
     {
         lifeSpan.Start();
@@ -20,7 +23,6 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         GetComponent<SpriteRenderer>().flipY = GetComponentInParent<SpriteRenderer>().flipY;
-
         lifeSpan.Update();
     }
     private void Death(object sender, EventArgs e)
@@ -31,20 +33,34 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy") && collision.name == "Collider" && !collision.transform.parent.GetComponent<EnemyManager>().deathTimer.isActive)
+        if (!EnemyHitted)
         {
-            Vector3 dir = (GameObject.Find("Player").transform.position - collision.transform.position).normalized;
-            dir.z = 0;
+            if (collision.CompareTag("Enemy") && collision.name == "Collider" && !collision.transform.parent.GetComponent<EnemyManager>().deathTimer.isActive)
+            {
 
-            collision.transform.parent.GetComponent<EnemyManager>().SetDir(-dir);
-            collision.transform.parent.GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
+                Vector3 dir = (GameObject.Find("Player").transform.position - collision.transform.position).normalized;
+                dir.z = 0;
+
+                collision.transform.parent.GetComponent<EnemyManager>().SetDir(-dir);
+                collision.transform.parent.GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
+                EnemyHitted = true;
+
+            }
         }
-        else if (collision.CompareTag("Saltpeter"))
+        if (!SalpeterHitted)
         {
-            collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
+
+            if (collision.CompareTag("Saltpeter"))
+            {
+                collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
+                SalpeterHitted = true;
+            }
         }
-
-
     }
 
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        
+    }
 }

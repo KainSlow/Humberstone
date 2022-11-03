@@ -15,8 +15,8 @@ public class NPCVInteractable : NPCInteractable
     [SerializeField] Button[] buyButtons;
 
     [SerializeField] Image[] shopImages;
-    int smallCost;
-    int bigCost;
+    float smallCost;
+    float bigCost;
 
     string currenTitle;
 
@@ -72,13 +72,13 @@ public class NPCVInteractable : NPCInteractable
     {
         if (currenTitle == "Herrería")
         {
-            smallCost = (int)(3 * PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation);
-            bigCost = (int)(7 * PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation);
+            smallCost = (3 * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
+            bigCost = (7 * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
         }
         else if (currenTitle == "Pulpería")
         {
-            smallCost = (int)(3 * PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL);
-            bigCost = (int)(8 * PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL);
+            smallCost = (3 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            bigCost = (8 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
         }
 
         buyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = smallCost.ToString();
@@ -112,7 +112,7 @@ public class NPCVInteractable : NPCInteractable
     }
 
 
-    private void Buy(int cost)
+    private void Buy(float cost)
     {
         PlayerGlobals.Instance.DecreaseTokens(cost);
         PlayerGlobals.Instance.OnItemBought(EventArgs.Empty);

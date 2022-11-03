@@ -55,6 +55,9 @@ public class EnemyWBehaviour : EnemyBehavior
         if (isMovingToPlayer)
         {
             SetAngle(player.transform);
+
+            Dir = (player.transform.position - transform.position).normalized;
+
             MoveTowardsDirection(Dir);
         }
         else if (isCollecting && !isColliding || isBreaking && !isColliding)
@@ -158,7 +161,7 @@ public class EnemyWBehaviour : EnemyBehavior
             if (!isMovingToPlayer)
             {
                 target = collision.transform;
-                Dir = collision.transform.position - transform.position;
+                Dir = (collision.transform.position - transform.position).normalized;
                 isBreaking = true;
             }
         }
@@ -166,7 +169,7 @@ public class EnemyWBehaviour : EnemyBehavior
             if (!isMovingToPlayer && !isBreaking)
             {
                 target = collision.transform;
-                Dir = collision.transform.position - transform.position;
+                Dir = (collision.transform.position - transform.position).normalized;
                 isCollecting = true;
             }
         }

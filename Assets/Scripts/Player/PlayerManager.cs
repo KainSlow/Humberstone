@@ -61,12 +61,14 @@ public class PlayerManager : MonoBehaviour
 
     public virtual void OnPlayerHitted(EventArgs e)
     {
-        EventHandler handler = OnHit;
-        handler?.Invoke(this, e);
-        hitCD.Start();
-        DisableAim();
-        DisableMov();
-
+        if (!hitCD.isActive)
+        {
+            EventHandler handler = OnHit;
+            handler?.Invoke(this, e);
+            hitCD.Start();
+            DisableAim();
+            DisableMov();
+        }
     }
 
     private void UpdateAttackCd(object sender, EventArgs e)

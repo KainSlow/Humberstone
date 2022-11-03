@@ -14,7 +14,7 @@ public class ButtonManager : MonoBehaviour
     {
         buttons[0].onClick.AddListener(Play);
         //buttons[1].onClick.AddListener(HTP);
-        //buttons[2].onClick.AddListener(About);
+        buttons[2].onClick.AddListener(About);
         buttons[3].onClick.AddListener(Exit);
     }
 

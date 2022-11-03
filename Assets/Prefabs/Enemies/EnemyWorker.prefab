@@ -342,7 +342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectorRaidus: 4
-  speed: 450
+  speed: 2
   whatCanIHit:
     serializedVersion: 2
     m_Bits: 512

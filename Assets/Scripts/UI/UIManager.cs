@@ -10,10 +10,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] Button endWorkButton;
     [SerializeField] GameObject popUp;
     [SerializeField] Button[] popUpButtons;
-
+    [SerializeField] Image InteractKey;
     [SerializeField] Slider cdSlide;
-
     TextMeshProUGUI[] textMP;
+
+    public bool canInteract;
     Slider hungerSlide;
     void Start()
     {
@@ -73,7 +74,16 @@ public class UIManager : MonoBehaviour
             cdSlide.gameObject.SetActive(false);
         }
 
+        if (canInteract)
+        {
+            InteractKey.GetComponent<RectTransform>().position = Camera.main.WorldToScreenPoint(oPlayer.transform.position - Vector3.up * 0.7f);
+            InteractKey.gameObject.SetActive(true);
+        }
+        else
+        {
+            InteractKey.gameObject.SetActive(false);
 
+        }
     }
 
 
