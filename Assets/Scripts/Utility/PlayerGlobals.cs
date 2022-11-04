@@ -87,7 +87,7 @@ public class PlayerGlobals
         DayFee = 0;
         Inflation = 1f;
         SuspicionLVL = 1f;
-        MaxSuspicion = 3f;
+        MaxSuspicion = 4f;
 
         MaxShovelLVL = 7;
         MaxBagLVL = 10;
@@ -130,7 +130,7 @@ public class PlayerGlobals
 
     private void IncreaseInflation(object sender, EventArgs e)
     {
-        Inflation *= 1.05f;
+        Inflation *= 1.08f;
     }
 
     public void IncreaseSuspicion()

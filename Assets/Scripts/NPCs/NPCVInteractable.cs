@@ -72,13 +72,13 @@ public class NPCVInteractable : NPCInteractable
     {
         if (currenTitle == "Herrería")
         {
-            smallCost = (3 * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
+            smallCost = (5 * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
             bigCost = (7 * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
         }
         else if (currenTitle == "Pulpería")
         {
-            smallCost = (3 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
-            bigCost = (8 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            smallCost = (4 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            bigCost = (12 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
         }
 
         buyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = smallCost.ToString("0.00");
