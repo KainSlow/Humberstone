@@ -12,10 +12,6 @@ public class PlayerAttack : MonoBehaviour
         lifeSpan = new Timer(lifeTime);
         lifeSpan.OnTime += Death;
     }
-
-    bool SalpeterHitted;
-    bool EnemyHitted;
-
     private void Start()
     {
         lifeSpan.Start();
@@ -32,35 +28,22 @@ public class PlayerAttack : MonoBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (!EnemyHitted)
+{
+        if (collision.CompareTag("Enemy") && collision.name == "Collider" && !collision.transform.parent.GetComponent<EnemyManager>().deathTimer.isActive)
         {
-            if (collision.CompareTag("Enemy") && collision.name == "Collider" && !collision.transform.parent.GetComponent<EnemyManager>().deathTimer.isActive)
-            {
 
-                Vector3 dir = (GameObject.Find("Player").transform.position - collision.transform.position).normalized;
-                dir.z = 0;
+            Vector3 dir = (GameObject.Find("Player").transform.position - collision.transform.position).normalized;
+            dir.z = 0;
 
-                collision.transform.parent.GetComponent<EnemyManager>().SetDir(-dir);
-                collision.transform.parent.GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
-                EnemyHitted = true;
+            collision.transform.parent.GetComponent<EnemyManager>().SetDir(-dir);
+            collision.transform.parent.GetComponent<EnemyManager>().OnEnemyHitted(EventArgs.Empty);
 
-            }
         }
-        if (!SalpeterHitted)
+        if (collision.CompareTag("Saltpeter"))
         {
-
-            if (collision.CompareTag("Saltpeter"))
-            {
-                collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
-                SalpeterHitted = true;
-            }
+            collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
         }
     }
 
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        
-    }
 }

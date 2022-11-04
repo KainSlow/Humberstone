@@ -81,8 +81,8 @@ public class NPCVInteractable : NPCInteractable
             bigCost = (8 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
         }
 
-        buyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = smallCost.ToString();
-        buyButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = bigCost.ToString();
+        buyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = smallCost.ToString("0.00");
+        buyButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = bigCost.ToString("0.00");
     }
 
     private void SmallBuy()

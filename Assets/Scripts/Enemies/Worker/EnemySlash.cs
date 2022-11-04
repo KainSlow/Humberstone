@@ -12,10 +12,6 @@ public class EnemySlash : MonoBehaviour
         lifeSpan.OnTime += Death;
     }
 
-
-    bool SalpeterHitted;
-    bool PlayerHitted;
-
     private void Start()
     {
         lifeSpan.Start();
@@ -40,36 +36,13 @@ public class EnemySlash : MonoBehaviour
             {
                 pm.direction = (collision.transform.position - transform.parent.position).normalized;
                 pm.OnPlayerHitted(EventArgs.Empty);
-                PlayerHitted = true;
             }
         }
         if (collision.CompareTag("Saltpeter"))
         {
             collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
-            SalpeterHitted = true;
         }
 
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player") && !PlayerHitted)
-        {
-            PlayerManager pm = collision.transform.parent.GetComponent<PlayerManager>();
-            if (pm != null)
-            {
-
-                pm.direction = (collision.transform.position - transform.parent.position).normalized;
-                pm.OnPlayerHitted(EventArgs.Empty);
-                PlayerHitted = true;
-
-            }
-        }
-        if (collision.CompareTag("Saltpeter") && !SalpeterHitted)
-        {
-            collision.transform.parent.GetComponent<SaltpeterBehavior>().OnHitted(EventArgs.Empty);
-            SalpeterHitted = true;
-
-        }
-    }
 }

@@ -291,6 +291,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC Juan
       objectReference: {fileID: 0}
+    - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2978789146858454762, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -315,6 +319,10 @@ PrefabInstance:
     - target: {fileID: 4455167626154969509, guid: 12edaf1cfcb49054a9f60799033bb845, type: 3}
       propertyPath: m_Name
       value: CameraHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 4455167626154969509, guid: 12edaf1cfcb49054a9f60799033bb845, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4455167626154969514, guid: 12edaf1cfcb49054a9f60799033bb845, type: 3}
       propertyPath: player
@@ -376,6 +384,10 @@ PrefabInstance:
     - target: {fileID: 2271081270427574596, guid: f01d39044833f104ba2cb291942cd547, type: 3}
       propertyPath: m_Name
       value: SetFullScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2271081270427574596, guid: f01d39044833f104ba2cb291942cd547, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2271081270427574598, guid: f01d39044833f104ba2cb291942cd547, type: 3}
       propertyPath: m_RootOrder
@@ -513,6 +525,10 @@ PrefabInstance:
     - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_Name
       value: NPC Diego
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2978789146858454762, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_text
@@ -886,6 +902,10 @@ PrefabInstance:
     - target: {fileID: 2978789146324835325, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
       propertyPath: m_Name
       value: NPCVendor Arturo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978789146324835325, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
@@ -35600,6 +35620,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2961486974810203065, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2961486974810203070, guid: 2badaf08a0b983549923d3f73e73cb8f, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -35700,9 +35724,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 823070640200007657, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 823070640200007657, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 823070640200007662, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
       propertyPath: m_RootOrder
@@ -35861,6 +35901,10 @@ PrefabInstance:
     - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_Name
       value: NPC Pedro
+      objectReference: {fileID: 0}
+    - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2978789146858454762, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_fontAsset

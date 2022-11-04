@@ -87,7 +87,7 @@ public class PlayerGlobals
         DayFee = 0;
         Inflation = 1f;
         SuspicionLVL = 1f;
-        MaxSuspicion = 6f;
+        MaxSuspicion = 3f;
 
         MaxShovelLVL = 7;
         MaxBagLVL = 10;
