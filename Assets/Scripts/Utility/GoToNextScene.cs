@@ -14,10 +14,18 @@ public class GoToNextScene : MonoBehaviour
         {
             PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Ir a dormir?";
         }
-        PopUp.SetActive(true);
+
+        if (collision.CompareTag("Player"))
+        {
+            PopUp.SetActive(true);
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        PopUp.SetActive(false);
+        if (collision.CompareTag("Player"))
+        {
+            PopUp.SetActive(false);
+
+        }
     }
 }

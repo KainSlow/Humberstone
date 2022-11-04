@@ -37,9 +37,6 @@ public class PlayerGlobals
 
     private PlayerGlobals()
     {
-
-        isObjCollected = new bool[3];
-
         SetDefaultValues();
 
         OnBuy += SetSpeed;
@@ -75,6 +72,9 @@ public class PlayerGlobals
     public void SetDefaultValues()
     {
         //Debug
+
+        isObjCollected = new bool[3];
+
 
         SaltpeterNeeded = 30;
 
