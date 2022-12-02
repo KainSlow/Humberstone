@@ -50,8 +50,10 @@ public class EnemyWBehaviour : EnemyBehavior
                 }
             }
         }
+    }
 
-
+    private void FixedUpdate()
+    {
         if (isMovingToPlayer)
         {
             SetAngle(player.transform);
@@ -62,7 +64,7 @@ public class EnemyWBehaviour : EnemyBehavior
         }
         else if (isCollecting && !isColliding || isBreaking && !isColliding)
         {
-            if(target != null)
+            if (target != null)
             {
                 SetAngle(target);
                 MoveTowardsDirection(Dir);
