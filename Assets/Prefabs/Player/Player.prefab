@@ -441,7 +441,7 @@ MonoBehaviour:
   movSrc: {fileID: 5352029930408380986}
   SFX: {fileID: 2336112461669273173}
   Attack: {fileID: 8300000, guid: 0ffb6cafeac5a1d4aa6568cd8f562f8e, type: 3}
-  Walk: {fileID: 8300000, guid: 964433af9def9144fa899738be884430, type: 3}
+  Walk: {fileID: 8300000, guid: dad278b086c5c094bab426fd2e1a45d2, type: 3}
   Hit: {fileID: 8300000, guid: 9d604546a26c4af48b8a78190c8feb4f, type: 3}
 --- !u!82 &5352029930408380986
 AudioSource:
@@ -455,7 +455,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 964433af9def9144fa899738be884430, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.7
   m_Pitch: 0.5
   Loop: 0
   Mute: 0

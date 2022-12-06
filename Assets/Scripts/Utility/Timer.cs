@@ -6,7 +6,7 @@ using UnityEngine;
 public class Timer
 {
     public event EventHandler OnTime;
-
+    public event EventHandler OnStart;
     public float EndTime { get; private set; }
     public float CurrentTime { get; private set; }
 
@@ -40,6 +40,18 @@ public class Timer
         CurrentTime = 0;
     }
 
+    public void Start(bool isCalling)
+    {
+        isActive = true;
+        CurrentTime = 0;
+
+        if (isCalling)
+        {
+            CallEvent(OnStart);
+        }
+    }
+
+
     public void Stop()
     {
         isActive = false;
@@ -53,7 +65,7 @@ public class Timer
 
         if (isCalling)
         {
-            CallEvent();
+            CallEvent(OnTime);
         }
 
     }
@@ -78,7 +90,7 @@ public class Timer
             {
                 CurrentTime -= CurrentTime;
 
-                CallEvent();
+                CallEvent(OnTime);
 
                 if (!isLooping)
                 {
@@ -88,9 +100,9 @@ public class Timer
         }
     }
 
-    private void CallEvent()
+    private void CallEvent(EventHandler OnEvent)
     {
-        EventHandler handler = OnTime;
+        EventHandler handler = OnEvent;
 
         handler?.Invoke(this, EventArgs.Empty);
     }
