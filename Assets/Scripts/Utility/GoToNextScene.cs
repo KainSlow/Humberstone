@@ -25,7 +25,6 @@ public class GoToNextScene : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PopUp.SetActive(false);
-
         }
     }
 }
