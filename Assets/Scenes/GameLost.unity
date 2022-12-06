@@ -305,7 +305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Volver al Men\xFA"
+  m_text: "Volver al men\xFA"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
   m_sharedMaterial: {fileID: 8636833704714161159, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
@@ -922,7 +922,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Te Han \nDescubierto"
+  m_text: "\xA1Te han \ndescubierto!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
   m_sharedMaterial: {fileID: 8636833704714161159, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
