@@ -40,7 +40,7 @@ public class EnemyManager : MonoBehaviour
         lifes--;
     }
 
-    protected void Death(object sender, EventArgs e)
+    protected virtual void Death(object sender, EventArgs e)
     {
         Destroy(gameObject);
     }
@@ -64,7 +64,6 @@ public class EnemyManager : MonoBehaviour
             if (!deathTimer.isActive)
             {
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
-
             }
         }
 

@@ -76,9 +76,13 @@ public class RatBehavior : EnemyBehavior
 
         if(collision.transform.parent.name == player.name)
         {
+            if (!GetComponent<EnemyManager>().deathTimer.isActive)
+            {
+                rb.velocity = Vector2.zero;
+                idleTime.Start();
+            }
             isMovingToPlayer = false;
-            rb.velocity = Vector2.zero;
-            idleTime.Start();
+
         }
 
     }
@@ -93,8 +97,11 @@ public class RatBehavior : EnemyBehavior
     #region Timer Helpers
     private void StartIdle(object sender, EventArgs e)
     {
-        rb.velocity = Vector2.zero;
-        idleTime.Start();
+        if (!GetComponent<EnemyManager>().deathTimer.isActive)
+        {
+            rb.velocity = Vector2.zero;
+            idleTime.Start();
+        }
     }
 
     private void StartProwl(object sender, EventArgs e)
@@ -107,12 +114,11 @@ public class RatBehavior : EnemyBehavior
     public override void DeathBehaviour()
     {
         Vector3 dir = (transform.position - player.transform.position).normalized;
-        rb.velocity = dir * speed * 3.5f * Time.deltaTime;
-
+        rb.velocity = dir * speed * 200f * Time.deltaTime;
         var sr = GetComponentInChildren<SpriteRenderer>();
-        sr.color = new Color(sr.color.r,sr.color.g,sr.color.b,sr.color.a - 0.5f * Time.deltaTime);
+        sr.color = new Color(sr.color.r,sr.color.g,sr.color.b,sr.color.a - 0.5f * Time.fixedDeltaTime);
 
-        dead = true; ;
+        dead = true;
     }
 
 }

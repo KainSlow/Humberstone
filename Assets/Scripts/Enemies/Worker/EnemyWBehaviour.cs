@@ -32,7 +32,8 @@ public class EnemyWBehaviour : EnemyBehavior
     // Update is called once per frame
     void Update()
     {
-        Collider2D col = Physics2D.OverlapCircle(transform.position, 1.5f, whatCanIHit);
+        Collider2D col = Physics2D.OverlapCircle(transform.position, 2f, whatCanIHit);
+
         if(col != null)
         {
             if (col.transform.parent.name == "Player")

@@ -23,8 +23,14 @@ public class EndWorkUI : MonoBehaviour
 
     private int convertQ;
     private float totalTokens;
+
+    LevelLoader ll;
+
     private void Start()
     {
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
+
         maxButton.onClick.AddListener(MaxSaltpeter);
         minButton.onClick.AddListener(MinSaltpeter);
 
@@ -95,14 +101,14 @@ public class EndWorkUI : MonoBehaviour
     {
         Concrete();
         EndDay();
-        SceneManager.LoadSceneAsync("Town");
+        ll.LoadScene("Town");
     }
 
     private void NightTown()
     {
         Concrete();
         PlayerGlobals.Instance.IncreaseSuspicion();
-        SceneManager.LoadSceneAsync("TownNight");
+        ll.LoadScene("TownNight");
 
     }
 

@@ -153,10 +153,13 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            direction = (transform.position - collision.transform.position).normalized;
-            direction.z = 0;
+            if (!hitCD.isActive)
+            {
+                direction = (transform.position - collision.transform.position).normalized;
+                direction.z = 0;
+                OnPlayerHitted(EventArgs.Empty);
+            }
 
-            OnPlayerHitted(EventArgs.Empty);
         }
         
     }

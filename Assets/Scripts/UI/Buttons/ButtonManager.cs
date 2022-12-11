@@ -9,6 +9,8 @@ public class ButtonManager : MonoBehaviour
 {
     [SerializeField] Button[] buttons; // 0 -> PLay; 1 -> How to Play; 2-> Exit
 
+    LevelLoader ll;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,20 +18,23 @@ public class ButtonManager : MonoBehaviour
         //buttons[1].onClick.AddListener(HTP);
         buttons[2].onClick.AddListener(About);
         buttons[3].onClick.AddListener(Exit);
+
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
     }
 
     private void Play()
     {
-        SceneManager.LoadScene("Town");
+        ll.LoadScene("Town");
     }    
     private void HTP()
     {
-        SceneManager.LoadScene("Tutorial");
+        ll.LoadScene("Tutorial");
     }
 
     private void About()
     {
-        SceneManager.LoadScene("About");
+        ll.LoadScene("About");
     }
 
     private void Exit()

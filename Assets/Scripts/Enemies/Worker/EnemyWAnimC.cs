@@ -67,10 +67,13 @@ public class EnemyWAnimC : MonoBehaviour
         if (GetComponent<EnemyWBehaviour>().isAngry)
         {
             sr.color = Color.red;
+            shovelAnim.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         }
         else
         {
             sr.color = Color.white;
+            shovelAnim.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+
         }
     }
 

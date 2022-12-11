@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GoToNextScene : MonoBehaviour
 {
     [SerializeField] GameObject PopUp;
+    LevelLoader ll;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(SceneManager.GetActiveScene().name == "Town")

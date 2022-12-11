@@ -6,9 +6,13 @@ using UnityEngine.SceneManagement;
 
 public class BacktoMenuButton : MonoBehaviour
 {
+    LevelLoader ll;
+
     // Start is called before the first frame update
     void Start()
     {
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
         GetComponent<Button>().onClick.AddListener(GoMenu);
     }
 
@@ -18,6 +22,6 @@ public class BacktoMenuButton : MonoBehaviour
         {
             PlayerGlobals.Instance.SetDefaultValues();
         }
-        SceneManager.LoadScene("MenuScene");
+        ll.LoadScene("MenuScene");
     }
 }

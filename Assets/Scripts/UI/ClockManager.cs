@@ -15,8 +15,11 @@ public class ClockManager : MonoBehaviour
 
     Scene currentScene;
 
+    LevelLoader ll;
     void Start()
     {
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
         time = GetComponentInChildren<TextMeshProUGUI>();
         currentScene = SceneManager.GetActiveScene();
         Speed = 180f / PlayerGlobals.Instance.maxDayTime;
@@ -45,7 +48,7 @@ public class ClockManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("WorkEnd");
+                ll.LoadScene("WorkEnd");
             }
 
         }

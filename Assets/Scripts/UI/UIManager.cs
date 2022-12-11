@@ -16,8 +16,14 @@ public class UIManager : MonoBehaviour
 
     public bool canInteract;
     Slider hungerSlide;
+    LevelLoader ll;
+
     void Start()
     {
+
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
+
         textMP = GetComponentsInChildren<TextMeshProUGUI>();
         hungerSlide = GetComponentInChildren<Slider>();
 
@@ -30,7 +36,6 @@ public class UIManager : MonoBehaviour
             endWorkButton.gameObject.SetActive(true);
             popUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Estás seguro/a?";
         }
-
 
         Debug.Log(PlayerGlobals.Instance.SuspicionLVL);
 
@@ -96,22 +101,21 @@ public class UIManager : MonoBehaviour
     private void Confirm()
     {
         Scene currentScene = SceneManager.GetActiveScene();
-
         Time.timeScale = 1f;
         if(currentScene.name != "TownNight")
         {
             if(currentScene.name == "Town")
             {
-                SceneManager.LoadSceneAsync("CaveZone");
+                ll.LoadScene("CaveZone");
             }
             else if(currentScene.name == "CaveZone")
             {
-                SceneManager.LoadSceneAsync("WorkEnd");
+                ll.LoadScene("WorkEnd");
             }
         }
         else
         {
-            SceneManager.LoadSceneAsync("Town");
+            ll.LoadScene("Town");
             PlayerGlobals.Instance.OnDayChanged(EventArgs.Empty);
         }
     }
