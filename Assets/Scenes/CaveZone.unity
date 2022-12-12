@@ -1429,6 +1429,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 915543590}
     - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: matrixWidth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
+      propertyPath: matrixHeight
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794567990433440493, guid: f54d4afb0dce97f4480fc5a0371b639c, type: 3}
       propertyPath: objs.Array.size
       value: 3
       objectReference: {fileID: 0}
