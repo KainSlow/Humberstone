@@ -6,6 +6,8 @@ public class EnemySlash : MonoBehaviour
 {
     Timer lifeSpan;
     [SerializeField] float lifeTime;
+    SpriteRenderer sr;
+
     private void Awake()
     {
         lifeSpan = new Timer(lifeTime);
@@ -14,12 +16,24 @@ public class EnemySlash : MonoBehaviour
 
     private void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
+
+        Vector3 dir = (gameObject.transform.parent.position - transform.position).normalized;
+
+        if(dir.x >= 0)
+        {
+            sr.flipY = true;
+        }
+        else
+        {
+            sr.flipY = false;
+        }
+
+
         lifeSpan.Start();
     }
     void Update()
     {
-        GetComponent<SpriteRenderer>().flipY = GetComponentInParent<SpriteRenderer>().flipY;
-
         lifeSpan.Update();
     }
     private void Death(object sender, EventArgs e)
@@ -34,8 +48,12 @@ public class EnemySlash : MonoBehaviour
             PlayerManager pm = collision.transform.parent.GetComponent<PlayerManager>();
             if (pm != null)
             {
-                pm.direction = (collision.transform.position - transform.parent.position).normalized;
-                pm.OnPlayerHitted(EventArgs.Empty);
+                if (!pm.hitCD.isActive)
+                {
+                    pm.direction = (collision.transform.position - transform.parent.position).normalized;
+                    pm.OnPlayerHitted(EventArgs.Empty);
+                }
+
             }
         }
         if (collision.CompareTag("Saltpeter"))

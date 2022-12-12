@@ -61,63 +61,58 @@ public class LevelGeneration : MonoBehaviour
         {
             genObj = true;
         }
+
+        GenScene();
+
     }
 
     private void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        */
 
+    }
 
-        if (cY < matrixHeight+2)
+    private void GenScene()
+    {
+        for(int y = 0; y < matrixHeight + 2; y++)
         {
-            if (cX < matrixWidth+2)
+
+            for(int x = 0; x < matrixWidth + 2; x++)
             {
-                if(cY == 0 || cX == 0 || cX == matrixWidth+1 || cY == matrixHeight +1)
+                if (y == 0 || x == 0 || x == matrixWidth + 1 || y == matrixHeight + 1)
                 {
-                    Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
+                    Instantiate(FillRoom, new Vector3(x * moveIncrement, -y * moveIncrement, 0f), Quaternion.identity, transform);
                 }
                 else
                 {
-                    if(matrix[cY,cX] == 0)
+                    if (matrix[y, x] == 0)
                     {
-                        Instantiate(FillRoom, new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
+                        Instantiate(FillRoom, new Vector3(x * moveIncrement, -y * moveIncrement, 0f), Quaternion.identity, transform);
                     }
                     else
                     {
-                        Instantiate(rooms[matrix[cY, cX]], new Vector3(cX * moveIncrement, -cY * moveIncrement, 0f), Quaternion.identity, transform);
+                        Instantiate(rooms[matrix[y, x]], new Vector3(x * moveIncrement, -y * moveIncrement, 0f), Quaternion.identity, transform);
 
                         if (genObj)
                         {
                             int objType = 0;
-                            for(int i = 0; i < 3; i++)
+                            for (int i = 0; i < 3; i++)
                             {
-                                if(PlayerGlobals.Instance.isObjCollected[i] == false)
+                                if (PlayerGlobals.Instance.isObjCollected[i] == false)
                                 {
                                     objType = i;
                                     break;
                                 }
                             }
-                            Instantiate(objs[objType], new Vector3( (ObjPosX * moveIncrement), (-ObjPosY * moveIncrement), 0f), Quaternion.identity, null);
+                            Instantiate(objs[objType], new Vector3((ObjPosX * moveIncrement), (-ObjPosY * moveIncrement), 0f), Quaternion.identity, null);
                             genObj = false;
                         }
                     }
                 }
-
-                cX++;
             }
-            else
-            {
-                cY++;
-                cX = 0;
-            }
-        }
-        else
-        {
-            stopGeneration = true;
         }
     }
 

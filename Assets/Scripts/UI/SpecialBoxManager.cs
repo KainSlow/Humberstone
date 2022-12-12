@@ -18,8 +18,13 @@ public class SpecialBoxManager : MonoBehaviour
     bool needSalt;
     bool allObjCollected;
 
+
+    LevelLoader ll;
     void Start()
     {
+
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
         GiveB = GetComponentInChildren<Button>();
         GiveB.onClick.AddListener(Give);
 
@@ -37,7 +42,7 @@ public class SpecialBoxManager : MonoBehaviour
     }
     private void Confirm()
     {
-        SceneManager.LoadScene("EndGame");
+        ll.LoadScene("EndGame");
     }
 
     private void Cancel()

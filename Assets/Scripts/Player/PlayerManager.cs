@@ -20,6 +20,8 @@ public class PlayerManager : MonoBehaviour
     public Timer AttackCadence;
     public Timer hitCD;
 
+    private Timer invTime;
+
     public Vector3 direction;
     private void Awake()
     {
@@ -37,6 +39,8 @@ public class PlayerManager : MonoBehaviour
         AttackCadence.OnTime += EnableAim;
 
         hitCD = new Timer(knockbackDuration);
+        invTime = new Timer(knockbackDuration + 0.5f);
+
         hitCD.OnTime += EnableMov;
         hitCD.OnTime += EnableAim;
 
@@ -61,11 +65,12 @@ public class PlayerManager : MonoBehaviour
 
     public virtual void OnPlayerHitted(EventArgs e)
     {
-        if (!hitCD.isActive)
+        if (!hitCD.isActive && !invTime.isActive)
         {
             EventHandler handler = OnHit;
             handler?.Invoke(this, e);
             hitCD.Start();
+            invTime.Start();
             DisableAim();
             DisableMov();
         }
@@ -81,14 +86,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
-        
-
         disableTimer.Update();
-        
         hitCD.Update();
-
+        invTime.Update();
         AttackCadence.Update();
-        
     }
 
     public void DisableMov()
@@ -153,10 +154,13 @@ public class PlayerManager : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            direction = (transform.position - collision.transform.position).normalized;
-            direction.z = 0;
+            if (!hitCD.isActive)
+            {
+                direction = (transform.position - collision.transform.position).normalized;
+                direction.z = 0;
+                OnPlayerHitted(EventArgs.Empty);
+            }
 
-            OnPlayerHitted(EventArgs.Empty);
         }
         
     }

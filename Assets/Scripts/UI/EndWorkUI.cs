@@ -18,13 +18,21 @@ public class EndWorkUI : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI fee;
     [SerializeField] TextMeshProUGUI day;
-    [SerializeField] TextMeshProUGUI saltpeterQ;
+    [SerializeField] TextMeshProUGUI totalSaltpeterTXT;
+    [SerializeField] TextMeshProUGUI convertQTXT;
     [SerializeField] TextMeshProUGUI tokensTotal;
 
+    private int currentQ;
     private int convertQ;
     private float totalTokens;
+
+    LevelLoader ll;
+
     private void Start()
     {
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
+
         maxButton.onClick.AddListener(MaxSaltpeter);
         minButton.onClick.AddListener(MinSaltpeter);
 
@@ -38,24 +46,28 @@ public class EndWorkUI : MonoBehaviour
         fee.text = PlayerGlobals.Instance.DayFee.ToString();
         day.text = "Día:\n" + PlayerGlobals.Instance.Day;
 
-        convertQ = PlayerGlobals.Instance.Saltpeter;
+
+        currentQ = PlayerGlobals.Instance.Saltpeter;
+        convertQ = 0;
         tokensTotal.text = Convert().ToString("0.00");
 
     }
 
     private void Update()
     {
-        saltpeterQ.text = convertQ + "/" + PlayerGlobals.Instance.Saltpeter;
+        totalSaltpeterTXT.text = currentQ.ToString();
+        convertQTXT.text = convertQ.ToString();
+
         totalTokens = Convert();
         tokensTotal.text = totalTokens.ToString("0.00");
 
         if(convertQ < PlayerGlobals.Instance.DayFee)
         {
-            saltpeterQ.color = Color.red;
+            convertQTXT.color = Color.red;
         }
         else
         {
-            saltpeterQ.color = Color.white;
+            convertQTXT.color = Color.white;
         }
 
     }
@@ -68,11 +80,13 @@ public class EndWorkUI : MonoBehaviour
     private void MaxSaltpeter()
     {
         convertQ = PlayerGlobals.Instance.Saltpeter;
+        currentQ = 0;
     }
 
     private void MinSaltpeter()
     {
         convertQ = 0;
+        currentQ = PlayerGlobals.Instance.Saltpeter;
     }
 
     private void AddSaltpeter()
@@ -80,6 +94,7 @@ public class EndWorkUI : MonoBehaviour
         if (convertQ < PlayerGlobals.Instance.Saltpeter)
         {
             convertQ++;
+            currentQ--;
         }
     }
     private void SubSaltpeter()
@@ -87,6 +102,7 @@ public class EndWorkUI : MonoBehaviour
         if (convertQ > 0)
         {
             convertQ--;
+            currentQ++;
         }
     }
 
@@ -95,14 +111,14 @@ public class EndWorkUI : MonoBehaviour
     {
         Concrete();
         EndDay();
-        SceneManager.LoadSceneAsync("Town");
+        ll.LoadScene("Town");
     }
 
     private void NightTown()
     {
         Concrete();
         PlayerGlobals.Instance.IncreaseSuspicion();
-        SceneManager.LoadSceneAsync("TownNight");
+        ll.LoadScene("TownNight");
 
     }
 

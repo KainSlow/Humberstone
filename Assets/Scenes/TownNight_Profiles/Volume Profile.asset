@@ -98,7 +98,7 @@ MonoBehaviour:
     value: -200
   mixerBlueOutGreenIn:
     overrideState: 1
-    value: 100
+    value: 163
   mixerBlueOutBlueIn:
     overrideState: 1
     value: 150
@@ -107,10 +107,10 @@ MonoBehaviour:
     value: {x: 1, y: 1, z: 1, w: -0.10403122}
   gamma:
     overrideState: 1
-    value: {x: 1, y: 1, z: 1, w: -0.15604684}
+    value: {x: 1, y: 1, z: 1, w: -0.24436273}
   gain:
     overrideState: 1
-    value: {x: 1, y: 1, z: 1, w: -0.8309493}
+    value: {x: 1, y: 1, z: 1, w: -0.61070806}
   masterCurve:
     overrideState: 0
     value:

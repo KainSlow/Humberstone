@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class NPCInteractable : MonoBehaviour
 {
@@ -12,8 +13,9 @@ public class NPCInteractable : MonoBehaviour
 
     TextMeshProUGUI[] TextMP;
     [SerializeField] TextAsset textData;
-
     protected bool isInteracting;
+
+    public EventHandler OnInteract;
 
     protected virtual void Start()
     {
@@ -25,19 +27,22 @@ public class NPCInteractable : MonoBehaviour
 
     public virtual void Interact()
     {
+        SetText();
+
         if (!isInteracting)
         {
             isInteracting = true;
             DialogBox.SetActive(true);
+
 
             if(Name == "Antonio")
             {
                 SpecialBox.SetActive(true);
             }
 
+            EventHandler handler = OnInteract;
+            handler?.Invoke(this, EventArgs.Empty);
         }
-        SetText();
-
     }
 
     private void SetText()
@@ -47,7 +52,7 @@ public class NPCInteractable : MonoBehaviour
 
         int rand;
         
-        rand = Random.Range(0, txtData.Length);
+        rand = UnityEngine.Random.Range(0, txtData.Length);
         TextMP[1].text = txtData[rand];
 
         if (txtData[rand].Equals("") || txtData[rand].Equals(" ") || txtData[rand].Equals("\n") || txtData[rand] == null)

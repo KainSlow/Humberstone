@@ -9,14 +9,23 @@ public class ClockManager : MonoBehaviour
 {
     [SerializeField] RectTransform secondHand;
     TextMeshProUGUI time;
+    AudioSource aS;
+    [SerializeField] AudioClip oClock;
 
     private float Speed;
     private float currentAngle;
 
+    bool ended;
+
     Scene currentScene;
 
+    LevelLoader ll;
     void Start()
     {
+        aS = GetComponent<AudioSource>();
+
+        ll = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
         time = GetComponentInChildren<TextMeshProUGUI>();
         currentScene = SceneManager.GetActiveScene();
         Speed = 180f / PlayerGlobals.Instance.maxDayTime;
@@ -26,7 +35,19 @@ public class ClockManager : MonoBehaviour
         {
             secondHand.transform.eulerAngles = new Vector3(0f, 0f, 180f);
             PlayerGlobals.Instance.SetNightTime();
+        }else if(currentScene.name == "CaveZone")
+        {
+            aS.Play();
         }
+
+    }
+
+    private IEnumerator NextScene()
+    {
+
+        yield return new WaitForSeconds(2);
+
+        ll.LoadScene("WorkEnd");
 
     }
 
@@ -37,7 +58,6 @@ public class ClockManager : MonoBehaviour
 
         if (currentScene.name == "CaveZone")
         {
-
             if (PlayerGlobals.Instance.currentTime > 0)
             {
                 PlayerGlobals.Instance.UpdateTime();
@@ -45,12 +65,20 @@ public class ClockManager : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("WorkEnd");
+                if (!ended)
+                {
+                    aS.Stop();
+                    aS.volume = 0.45f;
+                    aS.PlayOneShot(oClock);
+                    StartCoroutine(NextScene());
+                    ended = true;
+                }
+
             }
 
         }
-        
     }
+
 
     private void MoveSecondHand()
     {

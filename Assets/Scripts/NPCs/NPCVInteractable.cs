@@ -11,27 +11,36 @@ public class NPCVInteractable : NPCInteractable
     [SerializeField] string titletxt;
     [SerializeField] GameObject Shop;
     [SerializeField] Button closeButton;
-
     [SerializeField] Button[] buyButtons;
+    [SerializeField] float IsmallCost;
+    [SerializeField] float IbigCost;
 
-    [SerializeField] Image[] shopImages;
+    [SerializeField] TextMeshProUGUI smallText;
+    [SerializeField] TextMeshProUGUI bigText;
+
     float smallCost;
     float bigCost;
 
     string currenTitle;
 
+    public EventHandler OnBuy;
+
+
     protected override void Start()
     {
-        smallCost = 0;
-        bigCost = 0;
         isInteracting = false;
 
         GetComponentInChildren<TextMeshPro>().text = Name;
 
         closeButton.onClick.AddListener(DeActivate);
+        buyButtons[0].onClick.AddListener(SmallBuy);
+        buyButtons[1].onClick.AddListener(BigBuy);
+    }
 
-        
-
+    public void OnBought(EventArgs e)
+    {
+        EventHandler handler = OnBuy;
+        handler?.Invoke(this, e);
     }
 
     public override void Interact()
@@ -39,53 +48,46 @@ public class NPCVInteractable : NPCInteractable
 
         if (!isInteracting)
         {
+
+            EventHandler handler = OnInteract;
+            handler?.Invoke(this, EventArgs.Empty);
+
             isInteracting = true;
             currenTitle = titletxt;
             Shop.GetComponentInChildren<TextMeshProUGUI>().text = currenTitle;
-            SetImages();
             SetPrices();
             Shop.SetActive(true);
             GameObject.Find("CameraHolder").GetComponent<CameraMov>().enabled = false;
-            buyButtons[0].onClick.AddListener(SmallBuy);
-            buyButtons[1].onClick.AddListener(BigBuy);
-
         }
 
-    }
-
-    private void SetImages()
-    {
-        if (currenTitle == "Herrería")
-        {
-            shopImages[0].sprite = Resources.Load<Sprite>("ShovelIco");
-            shopImages[1].sprite = Resources.Load<Sprite>("BagIco");
-
-        }
-        else if (currenTitle == "Pulpería")
-        {
-            shopImages[0].sprite = Resources.Load<Sprite>("SmallFIco");
-            shopImages[1].sprite = Resources.Load<Sprite>("BigFIco");
-        }
     }
 
     private void SetPrices()
     {
         if (currenTitle == "Herrería")
         {
-            smallCost = (5 * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
-            bigCost = (7 * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
+            smallCost = (IsmallCost * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
+            bigCost = (IbigCost * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
+
+            smallText.text = "Lvl: " + PlayerGlobals.Instance.ShovelLVL.ToString();
+            bigText.text = "Lvl: "+ PlayerGlobals.Instance.BagLVL.ToString();
+
         }
         else if (currenTitle == "Pulpería")
         {
-            smallCost = (4 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
-            bigCost = (12 * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            smallCost = (IsmallCost * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            bigCost = (IbigCost * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+
+            smallText.text = "Hallulla";
+            bigText.text = "Sopa";
+
         }
 
-        buyButtons[0].GetComponentInChildren<TextMeshProUGUI>().text = smallCost.ToString("0.00");
-        buyButtons[1].GetComponentInChildren<TextMeshProUGUI>().text = bigCost.ToString("0.00");
+        buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = smallCost.ToString("0.00");
+        buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = bigCost.ToString("0.00");
     }
 
-    private void SmallBuy()
+    public void SmallBuy()
     {
         Debug.Log(currenTitle);
         if(PlayerGlobals.Instance.Tokens >= smallCost)
@@ -114,12 +116,13 @@ public class NPCVInteractable : NPCInteractable
 
     private void Buy(float cost)
     {
+        OnBought(EventArgs.Empty);
         PlayerGlobals.Instance.DecreaseTokens(cost);
         PlayerGlobals.Instance.OnItemBought(EventArgs.Empty);
         SetPrices(); 
     }
 
-    private void BigBuy()
+    public void BigBuy()
     {
         if(PlayerGlobals.Instance.Tokens >= bigCost)
         {
@@ -145,9 +148,6 @@ public class NPCVInteractable : NPCInteractable
 
     public override void DeActivate()
     {
-        buyButtons[0].onClick.RemoveAllListeners();
-        buyButtons[1].onClick.RemoveAllListeners();
-
         isInteracting = false;
         Shop.SetActive(false);
     }
