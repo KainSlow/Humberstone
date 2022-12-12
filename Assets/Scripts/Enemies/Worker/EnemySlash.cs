@@ -18,7 +18,17 @@ public class EnemySlash : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
 
-        sr.flipY = gameObject.transform.parent.GetComponent<SpriteRenderer>().flipY;
+        Vector3 dir = (gameObject.transform.parent.position - transform.position).normalized;
+
+        if(dir.x >= 0)
+        {
+            sr.flipY = true;
+        }
+        else
+        {
+            sr.flipY = false;
+        }
+
 
         lifeSpan.Start();
     }

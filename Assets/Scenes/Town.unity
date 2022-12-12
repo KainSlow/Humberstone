@@ -211,6 +211,22 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 2fb3b2555b4fe384396e5d0fd5a31502, type: 2}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: aC
+      value: 
+      objectReference: {fileID: 8300000, guid: fda13120f0378444b9667125b0ef197c, type: 3}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fda13120f0378444b9667125b0ef197c, type: 3}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d8015ff64773044abdd10d09cecfb20, type: 3}
     - target: {fileID: 2978789146324835264, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: Name
       value: Juan
@@ -307,6 +323,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 8636833704714161159, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_Volume
+      value: 0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: MaxDistance
+      value: 2.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
 --- !u!114 &416986238 stripped
@@ -457,6 +481,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 7936800d06ef7f3428068366a12da8f0, type: 2}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 61b56d6f1f4559441b5bab302223fdbb, type: 3}
     - target: {fileID: 2978789146324835264, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: Name
       value: Diego
@@ -557,6 +589,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 8636833704714161159, guid: 5b307d42004a5274db2408c40850b68e, type: 2}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: MaxDistance
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
 --- !u!114 &564190713 stripped
@@ -835,6 +879,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: eab4e89aca985ff4684030751c8d55f1, type: 3}
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe545a5e521e9834a8b5ed6757d08558, type: 3}
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: f507641459668e14aa67469919748589, type: 3}
     - target: {fileID: -2190409080410391094, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
       propertyPath: Name
       value: Arturo
@@ -33161,6 +33221,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9118521374437531476, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: b34383df85326f54396f07f7c8d6c498, type: 3}
     - target: {fileID: -2190409080410391094, guid: 4659fa9b053bd9147a4d4d300c3a85da, type: 3}
       propertyPath: Name
       value: Don Ernesto
@@ -36285,6 +36353,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: dd2513fa5b84544409eb30381ac62366, type: 2}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 6fc533da7f3146a4987d0196fd2f2b76, type: 3}
     - target: {fileID: 2978789146324835264, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: Name
       value: Pedro

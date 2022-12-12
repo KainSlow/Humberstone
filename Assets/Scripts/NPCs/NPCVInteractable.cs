@@ -23,6 +23,9 @@ public class NPCVInteractable : NPCInteractable
 
     string currenTitle;
 
+    public EventHandler OnBuy;
+
+
     protected override void Start()
     {
         isInteracting = false;
@@ -34,11 +37,21 @@ public class NPCVInteractable : NPCInteractable
         buyButtons[1].onClick.AddListener(BigBuy);
     }
 
+    public void OnBought(EventArgs e)
+    {
+        EventHandler handler = OnBuy;
+        handler?.Invoke(this, e);
+    }
+
     public override void Interact()
     {
 
         if (!isInteracting)
         {
+
+            EventHandler handler = OnInteract;
+            handler?.Invoke(this, EventArgs.Empty);
+
             isInteracting = true;
             currenTitle = titletxt;
             Shop.GetComponentInChildren<TextMeshProUGUI>().text = currenTitle;
@@ -103,6 +116,7 @@ public class NPCVInteractable : NPCInteractable
 
     private void Buy(float cost)
     {
+        OnBought(EventArgs.Empty);
         PlayerGlobals.Instance.DecreaseTokens(cost);
         PlayerGlobals.Instance.OnItemBought(EventArgs.Empty);
         SetPrices(); 

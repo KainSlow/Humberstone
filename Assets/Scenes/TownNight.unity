@@ -206,6 +206,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 41dc939defb6c4341bfc9c5e48944b19, type: 2}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 839105173395626561, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 73393e3e72001b14f9852c4b60b5016d, type: 3}
     - target: {fileID: 2978789146324835264, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: Name
       value: Antonio
@@ -281,6 +289,18 @@ PrefabInstance:
     - target: {fileID: 2978789146324835325, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: MaxDistance
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8780186548875300028, guid: ede01457d484aeb45afbd0d912a08494, type: 3}
+      propertyPath: m_audioClip
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ede01457d484aeb45afbd0d912a08494, type: 3}

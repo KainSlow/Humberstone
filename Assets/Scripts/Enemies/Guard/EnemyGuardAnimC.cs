@@ -1,18 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyGuardAnimC : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    SpriteRenderer sr;
+    Animator animator;
+
+
+    private void Start()
     {
-        
+        sr = GetComponentInChildren<SpriteRenderer>();
+        animator = GetComponentInChildren<Animator>();
+        GetComponent<EnemyGuardManager>().OnAttack += TriggerAttack;
+
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        
+
+    }
+
+    public void TriggerAttack(object sender, EventArgs e)
+    {
+        animator.SetTrigger("Attack");
+    }
+
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            Vector3 dir = transform.position - collision.transform.position;
+
+            if(dir.x >= 0)
+            {
+                sr.flipX = true;
+            }
+            else
+            {
+                sr.flipX = false;
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ public class PlayerGlobals
 
     public const float TCONSTANT = 1.5f;
 
+    public bool hasSeenFighting { get; private set; }
     public int ShovelLVL { get; private set; }
     public int MaxShovelLVL { get; private set; }
     public int BagLVL { get; private set; }
@@ -48,6 +49,7 @@ public class PlayerGlobals
         OnNewDay += ReSetTime;
         OnNewDay += IncreaseInflation;
         OnNewDay += IncreaseFee;
+        OnNewDay += ResetSeenFighting;
     }
 
     public static PlayerGlobals Instance
@@ -104,6 +106,20 @@ public class PlayerGlobals
         Cadence = 2f - 0.25f * ShovelLVL;
         maxSaltpeter = 10 + 5 * BagLVL;
 
+    }
+
+    public void SeenFighting()
+    {
+        hasSeenFighting = true;
+    }
+
+    private void ResetSeenFighting(object sender, EventArgs e)
+    {
+        if (hasSeenFighting)
+        {
+            SuspicionLVL++;
+            hasSeenFighting = false;
+        }
     }
 
     public void SetObjCollected(int objType)
