@@ -26,6 +26,8 @@ public class EndWorkUI : MonoBehaviour
     private int convertQ;
     private float totalTokens;
 
+    bool Done;
+
     LevelLoader ll;
 
     private void Start()
@@ -109,16 +111,26 @@ public class EndWorkUI : MonoBehaviour
 
     private void BackToSleep()
     {
-        Concrete();
-        EndDay();
-        ll.LoadScene("Town");
+        if (!Done)
+        {
+            Concrete();
+            EndDay();
+            ll.LoadScene("Town");
+            Done = true;
+        }
+
     }
 
     private void NightTown()
     {
-        Concrete();
-        PlayerGlobals.Instance.IncreaseSuspicion();
-        ll.LoadScene("TownNight");
+        if (!Done)
+        {
+            Done = true;
+            Concrete();
+            PlayerGlobals.Instance.IncreaseSuspicion();
+            ll.LoadScene("TownNight");
+        }
+
 
     }
 

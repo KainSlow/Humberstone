@@ -19,7 +19,7 @@ public class JavierBox : MonoBehaviour
 
     private void Bribe()
     {
-        if(PlayerGlobals.Instance.SuspicionLVL >= 1)
+        if(PlayerGlobals.Instance.SuspicionLVL > 1)
         {
             if (PlayerGlobals.Instance.Saltpeter >= saltpeterCost)
             {
@@ -30,7 +30,7 @@ public class JavierBox : MonoBehaviour
     }
     void Update()
     {
-        slider.value = (float)PlayerGlobals.Instance.SuspicionLVL / PlayerGlobals.Instance.MaxSuspicion;
+        slider.value = (float)(PlayerGlobals.Instance.SuspicionLVL - 1) / (PlayerGlobals.Instance.MaxSuspicion - 1);
         costTXT.text = saltpeterCost.ToString();
 
     }

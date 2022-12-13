@@ -111,6 +111,9 @@ public class UIManager : MonoBehaviour
             else if(currentScene.name == "CaveZone")
             {
                 ll.LoadScene("WorkEnd");
+            }else if(currentScene.name == "Tutorial")
+            {
+                ll.LoadScene("MenuScene");
             }
         }
         else

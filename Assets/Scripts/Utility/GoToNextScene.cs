@@ -15,7 +15,10 @@ public class GoToNextScene : MonoBehaviour
         }else if(SceneManager.GetActiveScene().name == "TownNight")
         {
             PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Ir a dormir?";
-        }
+        }else if(SceneManager.GetActiveScene().name == "Tutorial")
+        {
+            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Volver al menú?";
+        } 
 
         if (collision.CompareTag("Player"))
         {

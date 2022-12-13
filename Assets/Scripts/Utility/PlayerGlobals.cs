@@ -44,6 +44,7 @@ public class PlayerGlobals
         OnBuy += SetCadence;
         OnBuy += SetMaxSaltpeter;
 
+        OnNewDay += SetSpeed;
         OnNewDay += AddDay;
         OnNewDay += IncreaseHunger;
         OnNewDay += ReSetTime;

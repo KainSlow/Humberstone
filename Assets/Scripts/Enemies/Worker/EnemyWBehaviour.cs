@@ -105,10 +105,6 @@ public class EnemyWBehaviour : EnemyBehavior
         isColliding = false;
     }
 
-    /*private void OnTriggerEnter2D(Collider2D collision)
-    {
-        OnTrigger(collision);
-    }*/
 
     private void OnTriggerStay2D(Collider2D collision)
     {

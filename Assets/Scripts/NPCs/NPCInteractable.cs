@@ -19,7 +19,10 @@ public class NPCInteractable : MonoBehaviour
 
     protected virtual void Start()
     {
-        TextMP = DialogBox.GetComponentsInChildren<TextMeshProUGUI>();
+        if(DialogBox != null)
+        {
+            TextMP = DialogBox.GetComponentsInChildren<TextMeshProUGUI>();
+        }
         isInteracting = false;
         GetComponentInChildren<TextMeshPro>().text = Name;
     }

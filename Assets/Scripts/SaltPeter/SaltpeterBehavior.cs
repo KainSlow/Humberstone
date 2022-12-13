@@ -6,6 +6,8 @@ using System;
 public class SaltpeterBehavior : MonoBehaviour
 {
     #region DropSettings
+    [SerializeField] GameObject saltpeterParticles;
+
     [SerializeField] GameObject cSaltpeter;
     [SerializeField] int dropQuantity;
     [SerializeField] int maxHits;
@@ -24,6 +26,8 @@ public class SaltpeterBehavior : MonoBehaviour
     Timer hitAnim;
     Timer hitInterval;
 
+
+
     private float animAngle;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,7 @@ public class SaltpeterBehavior : MonoBehaviour
         hitInterval.ActivateLooping();
 
         OnHit += DropSaltpeter;
+        OnHit += PlayParticles;
         hitAnim.OnTime += Death;
         hitAnim.OnTime += StopInterval;
 
@@ -56,6 +61,11 @@ public class SaltpeterBehavior : MonoBehaviour
         }
     }
 
+
+    private void PlayParticles(object sender, EventArgs e)
+    {
+        Instantiate(saltpeterParticles, transform.position, Quaternion.identity, null);
+    }
     private void PlayAnim()
     {
         //Shake

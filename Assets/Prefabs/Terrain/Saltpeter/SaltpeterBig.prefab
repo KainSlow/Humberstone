@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e79ac59f7032a4da6e6fbe45304e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saltpeterParticles: {fileID: 807710756654638097, guid: 4d65813076395be41946f80a0173c50f, type: 3}
   cSaltpeter: {fileID: 3439182367795739634, guid: ff0e3be1e472e294687a45c1f2ca0177, type: 3}
   dropQuantity: 3
   maxHits: 3
@@ -189,7 +190,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

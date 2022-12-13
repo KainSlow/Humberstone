@@ -32,9 +32,17 @@ public class NPCVInteractable : NPCInteractable
 
         GetComponentInChildren<TextMeshPro>().text = Name;
 
-        closeButton.onClick.AddListener(DeActivate);
-        buyButtons[0].onClick.AddListener(SmallBuy);
-        buyButtons[1].onClick.AddListener(BigBuy);
+        if(closeButton != null)
+        {
+            closeButton.onClick.AddListener(DeActivate);
+        }
+
+        if(buyButtons[0] != null)
+        {
+            buyButtons[0].onClick.AddListener(SmallBuy);
+            buyButtons[1].onClick.AddListener(BigBuy);
+        }
+
     }
 
     public void OnBought(EventArgs e)

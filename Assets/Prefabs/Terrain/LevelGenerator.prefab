@@ -56,7 +56,8 @@ MonoBehaviour:
   whatIsRoom:
     serializedVersion: 2
     m_Bits: 64
-  moveIncrement: 20
+  moveIncrement: 18
   matrixWidth: 6
   matrixHeight: 4
+  objs: []
   stopGeneration: 0
