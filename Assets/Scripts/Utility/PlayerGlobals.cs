@@ -99,7 +99,7 @@ public class PlayerGlobals
         Hunger = 3;
         MaxHunger = 6;
 
-        Tokens = 12;
+        Tokens = 8;
         Saltpeter = 0;
 
         Speed = Hunger * 0.25f + 0.25f;

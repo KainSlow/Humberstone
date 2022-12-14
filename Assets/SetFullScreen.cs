@@ -8,24 +8,20 @@ public class SetFullScreen : MonoBehaviour
     void Start()
     {
         Screen.fullScreenMode = FullScreenMode.FullScreenWindow;
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.F11))
         {
             Toggle();
         }
-
     }
 
 
     private void Toggle()
     {
-
         Screen.fullScreen = !Screen.fullScreen;
     }
 }

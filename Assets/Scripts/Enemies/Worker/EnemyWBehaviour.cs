@@ -45,6 +45,7 @@ public class EnemyWBehaviour : EnemyBehavior
             }
             if(col.transform.parent.GetComponent<SaltpeterBehavior>() != null && isBreaking)
             {
+                SetAngle(col.transform);
                 if (!GetComponent<EnemyWManager>().AttackCD.isActive)
                 {
                     Attack();

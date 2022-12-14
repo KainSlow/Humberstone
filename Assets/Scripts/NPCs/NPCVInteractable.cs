@@ -111,8 +111,8 @@ public class NPCVInteractable : NPCInteractable
         }
         else if (currenTitle == "Pulpería")
         {
-            smallCost = (IsmallCost * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
-            bigCost = (IbigCost * (PlayerGlobals.Instance.Inflation / PlayerGlobals.Instance.SuspicionLVL));
+            smallCost = (IsmallCost * (PlayerGlobals.Instance.Inflation * PlayerGlobals.Instance.SuspicionLVL*0.5f));
+            bigCost = (IbigCost * (PlayerGlobals.Instance.Inflation * PlayerGlobals.Instance.SuspicionLVL*0.5f));
 
             smallText.text = "Hallulla";
             bigText.text = "Sopa";
