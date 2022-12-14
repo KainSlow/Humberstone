@@ -78,7 +78,6 @@ public class PlayerGlobals
 
         isObjCollected = new bool[3];
 
-
         SaltpeterNeeded = 30;
 
         maxDayTime = 60f;
@@ -100,7 +99,7 @@ public class PlayerGlobals
         Hunger = 3;
         MaxHunger = 6;
 
-        Tokens = 0;
+        Tokens = 12;
         Saltpeter = 0;
 
         Speed = Hunger * 0.25f + 0.25f;

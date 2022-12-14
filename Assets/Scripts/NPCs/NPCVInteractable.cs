@@ -74,11 +74,39 @@ public class NPCVInteractable : NPCInteractable
     {
         if (currenTitle == "Herrería")
         {
-            smallCost = (IsmallCost * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
-            bigCost = (IbigCost * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
+            if(PlayerGlobals.Instance.ShovelLVL < PlayerGlobals.Instance.MaxShovelLVL)
+            {
+                smallText.text = "Lvl: " + PlayerGlobals.Instance.ShovelLVL.ToString();
+                smallCost = (IsmallCost * (PlayerGlobals.Instance.ShovelLVL * PlayerGlobals.Instance.Inflation));
 
-            smallText.text = "Lvl: " + PlayerGlobals.Instance.ShovelLVL.ToString();
-            bigText.text = "Lvl: "+ PlayerGlobals.Instance.BagLVL.ToString();
+                buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = smallCost.ToString("0.00");
+
+            }
+            else
+            {
+                smallText.text = "Lvl: MÁX";
+                buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = "-/-";
+
+            }
+
+            if (PlayerGlobals.Instance.BagLVL < PlayerGlobals.Instance.MaxBagLVL)
+            {
+                bigText.text = "Lvl: " + PlayerGlobals.Instance.BagLVL.ToString();
+                bigCost = (IbigCost * (PlayerGlobals.Instance.BagLVL * PlayerGlobals.Instance.Inflation));
+
+
+                buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = bigCost.ToString("0.00");
+
+            }
+            else
+            {
+                bigText.text = "Lvl: MÁX";
+                buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = "-/-";
+
+            }
+
+
+
 
         }
         else if (currenTitle == "Pulpería")
@@ -89,10 +117,13 @@ public class NPCVInteractable : NPCInteractable
             smallText.text = "Hallulla";
             bigText.text = "Sopa";
 
+
+            buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = smallCost.ToString("0.00");
+            buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = bigCost.ToString("0.00");
+
         }
 
-        buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = smallCost.ToString("0.00");
-        buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = bigCost.ToString("0.00");
+        
     }
 
     public void SmallBuy()

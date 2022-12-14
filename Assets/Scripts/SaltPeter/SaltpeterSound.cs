@@ -18,15 +18,12 @@ public class SaltpeterSound : MonoBehaviour
 
     private void PlayHit(object sender, EventArgs e)
     {
-        if (!aS.isPlaying)
-        {
-
-            aS.volume = 0.6f;
-            float pitch = UnityEngine.Random.Range(0.7f, 1f);
-            aS.pitch = pitch;
-            int rand = UnityEngine.Random.Range(0, HitSounds.Count);
-            aS.PlayOneShot(HitSounds[rand]);
-        }
+        aS.Stop();
+        aS.volume = 0.6f;
+        float pitch = UnityEngine.Random.Range(0.7f, 1f);
+        aS.pitch = pitch;
+        int rand = UnityEngine.Random.Range(0, HitSounds.Count);
+        aS.PlayOneShot(HitSounds[rand]);
     }
 
 
