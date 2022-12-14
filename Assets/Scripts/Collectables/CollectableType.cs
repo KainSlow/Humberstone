@@ -5,7 +5,7 @@ using UnityEngine;
 public class CollectableType : MonoBehaviour
 {
     [SerializeField] int Type;
-
+    [SerializeField] GameObject itemPickUpSound;
     public int GetObjType()
     {
         return Type;
@@ -16,6 +16,7 @@ public class CollectableType : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            Instantiate(itemPickUpSound);
             PlayerGlobals.Instance.SetObjCollected(Type);
             Destroy(gameObject);
         }

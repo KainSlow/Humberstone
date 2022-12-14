@@ -78,7 +78,7 @@ public class PlayerGlobals
 
         isObjCollected = new bool[3];
 
-        SaltpeterNeeded = 30;
+        SaltpeterNeeded = 50;
 
         maxDayTime = 60f;
 

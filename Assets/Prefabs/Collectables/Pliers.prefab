@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
+  itemPickUpSound: {fileID: 8338584448223455970, guid: fdc66cd5273c5004a8c65e494caf10df, type: 3}
 --- !u!50 &4897787320961345823
 Rigidbody2D:
   serializedVersion: 4

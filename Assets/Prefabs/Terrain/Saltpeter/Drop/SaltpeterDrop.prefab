@@ -154,6 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpForce: 5
   endTime: 0.5
+  pickUpSound: {fileID: 8338584448223455970, guid: 4a84332ee3a10364e8e0b6ac037dc1c5, type: 3}
 --- !u!1 &3439182367919456109
 GameObject:
   m_ObjectHideFlags: 0

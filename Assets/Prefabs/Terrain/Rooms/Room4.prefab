@@ -1048,58 +1048,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objects:
   - {fileID: 8967586011043900494, guid: 08b9e53e32944ef4dbc9a3449fdbbd84, type: 3}
---- !u!1 &1821192011281656681
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1955549210187135667}
-  - component: {fileID: 7345963339473934024}
-  m_Layer: 6
-  m_Name: SpawnPoint (65)
-  m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1955549210187135667
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821192011281656681}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5, y: 5.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6679441027152758867}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7345963339473934024
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1821192011281656681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69a26a303415beb488583cf7cfe19f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 8967586011043900494, guid: 17ed5c2014fe6a84f898c078d523ca8c, type: 3}
-  - {fileID: 8967586011043900494, guid: 8a65d486067f1e045a848f748ef715e9, type: 3}
-  - {fileID: 8967586011043900494, guid: e04213d89bc80bf49ae5fc8334cd5c2d, type: 3}
-  - {fileID: 8967586011043900494, guid: 8fdb0ed47ab8d9645a2261f8181d6782, type: 3}
-  - {fileID: 8967586011043900494, guid: a3f6d4b8bd63251448d8c8eda820cd89, type: 3}
-  - {fileID: 8967586011043900494, guid: 41d0ae49091af3748b58a2a294e13ea7, type: 3}
-  - {fileID: 8967586011043900494, guid: db2c6e3bf3c7cc44cbf3ef14949fcbbe, type: 3}
 --- !u!1 &1972140711469870179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1229,6 @@ Transform:
   - {fileID: 7802289932245939212}
   - {fileID: 299264750574664866}
   - {fileID: 4603901492173270315}
-  - {fileID: 1955549210187135667}
   m_Father: {fileID: 6324840263836217603}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

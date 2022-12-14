@@ -48494,6 +48494,18 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 823070639926924347, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 823070640200007657, guid: 51f4ae1b4866d4844a50a0c1a1161433, type: 3}
       propertyPath: m_Name
       value: UI
@@ -48665,7 +48677,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5b1c819137576b143a3c697d1350c1a9, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.609
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0

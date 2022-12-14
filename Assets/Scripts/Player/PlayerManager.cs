@@ -156,13 +156,14 @@ public class PlayerManager : MonoBehaviour
         {
             if (!hitCD.isActive)
             {
-                direction = (transform.position - collision.transform.position).normalized;
-                direction.z = 0;
-                OnPlayerHitted(EventArgs.Empty);
+                if (!collision.gameObject.GetComponent<EnemyManager>().deathTimer.isActive)
+                {
+                    direction = (transform.position - collision.transform.position).normalized;
+                    direction.z = 0;
+                    OnPlayerHitted(EventArgs.Empty);
+                }
             }
-
         }
-        
     }
 
     private void DropSaltpeter(object sender, EventArgs e)

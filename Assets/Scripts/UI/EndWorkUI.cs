@@ -114,7 +114,6 @@ public class EndWorkUI : MonoBehaviour
         if (!Done)
         {
             Concrete();
-            EndDay();
             ll.LoadScene("Town");
             Done = true;
         }
@@ -150,11 +149,6 @@ public class EndWorkUI : MonoBehaviour
         PlayerGlobals.Instance.IncreaseTokens(totalTokens);
         PlayerGlobals.Instance.DecreaseSaltpeter(convertQ);
 
-    }
-
-    private void EndDay()
-    {
-        PlayerGlobals.Instance.OnDayChanged(EventArgs.Empty);
     }
 
 }

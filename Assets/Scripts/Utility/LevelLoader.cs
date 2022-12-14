@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +18,24 @@ public class LevelLoader : MonoBehaviour
         anim.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
+
+        if (SceneManager.GetActiveScene().name == "WorkEnd" || SceneManager.GetActiveScene().name == "TownNight")
+        {
+            if(scene == "Town")
+            {
+                if (PlayerGlobals.Instance.SuspicionLVL >= PlayerGlobals.Instance.MaxSuspicion)
+                {
+                    PlayerGlobals.Instance.SetDefaultValues();
+                    scene = "GameLost";
+                }
+                else
+                {
+                    PlayerGlobals.Instance.OnDayChanged(EventArgs.Empty);
+                }
+            }
+            
+
+        }
 
         SceneManager.LoadScene(scene);
     }

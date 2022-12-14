@@ -39,11 +39,7 @@ public class UIManager : MonoBehaviour
 
         Debug.Log(PlayerGlobals.Instance.SuspicionLVL);
 
-        if(PlayerGlobals.Instance.SuspicionLVL >= PlayerGlobals.Instance.MaxSuspicion && SceneManager.GetActiveScene().name == "Town")
-        {
-            PlayerGlobals.Instance.SetDefaultValues();
-            SceneManager.LoadSceneAsync("GameLost");
-        }
+
     }
 
     // Update is called once per frame
@@ -118,8 +114,9 @@ public class UIManager : MonoBehaviour
         }
         else
         {
+            
+
             ll.LoadScene("Town");
-            PlayerGlobals.Instance.OnDayChanged(EventArgs.Empty);
         }
     }
 

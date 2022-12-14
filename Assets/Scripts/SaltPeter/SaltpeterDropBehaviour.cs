@@ -8,6 +8,7 @@ public class SaltpeterDropBehaviour : MonoBehaviour
 {
     [SerializeField] float jumpForce;
     [SerializeField] float endTime;
+    [SerializeField] GameObject pickUpSound;
     Rigidbody2D rb;
     Timer EndTimer;
     Vector2 jumpDir;
@@ -75,12 +76,17 @@ public class SaltpeterDropBehaviour : MonoBehaviour
         {
             if (PlayerGlobals.Instance.Saltpeter < PlayerGlobals.Instance.maxSaltpeter)
             {
+                Instantiate(pickUpSound);
+
+
                 PlayerGlobals.Instance.AddSaltpeter();
                 Destroy(gameObject);
             }
+
         }
         if (collision.CompareTag("Enemy") && collision.name == "Collider" && collision.transform.parent.name.Contains("EnemyWorker"))
         {
+            Instantiate(pickUpSound);
             collision.transform.parent.GetComponent<EnemyWManager>().OnDropCollected(EventArgs.Empty);
             Destroy(gameObject);
         }
