@@ -1,3 +1,5 @@
 # Humberstone
-College Assigment 
-Simple videogame made in Unity
+College Assigment:
+
+A 2D Top Down
+RPG, Roguelite - Prototype
