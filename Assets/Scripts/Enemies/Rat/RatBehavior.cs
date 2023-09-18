@@ -74,6 +74,7 @@ public class RatBehavior : EnemyBehavior
             return;
         }
 
+        if(player != null)
         if(collision.transform.parent.name == player.name)
         {
             if (!GetComponent<EnemyManager>().deathTimer.isActive)

@@ -72,7 +72,7 @@ public class NPCVInteractable : NPCInteractable
 
     private void SetPrices()
     {
-        if (currenTitle == "Herrería")
+        if (currenTitle == "Herreria")
         {
             if(PlayerGlobals.Instance.ShovelLVL < PlayerGlobals.Instance.MaxShovelLVL)
             {
@@ -84,7 +84,7 @@ public class NPCVInteractable : NPCInteractable
             }
             else
             {
-                smallText.text = "Lvl: MÁX";
+                smallText.text = "Lvl: MAX";
                 buyButtons[0].GetComponentInChildren<TextMeshProUGUI>(true).text = "-/-";
 
             }
@@ -100,7 +100,7 @@ public class NPCVInteractable : NPCInteractable
             }
             else
             {
-                bigText.text = "Lvl: MÁX";
+                bigText.text = "Lvl: MAX";
                 buyButtons[1].GetComponentInChildren<TextMeshProUGUI>(true).text = "-/-";
 
             }
@@ -109,7 +109,7 @@ public class NPCVInteractable : NPCInteractable
 
 
         }
-        else if (currenTitle == "Pulpería")
+        else if (currenTitle == "Pulperia")
         {
             smallCost = (IsmallCost * (PlayerGlobals.Instance.Inflation * PlayerGlobals.Instance.SuspicionLVL*0.5f));
             bigCost = (IbigCost * (PlayerGlobals.Instance.Inflation * PlayerGlobals.Instance.SuspicionLVL*0.5f));
@@ -131,7 +131,7 @@ public class NPCVInteractable : NPCInteractable
         Debug.Log(currenTitle);
         if(PlayerGlobals.Instance.Tokens >= smallCost)
         {
-            if (currenTitle == "Herrería")
+            if (currenTitle == "Herreria")
             {
                 if (PlayerGlobals.Instance.ShovelLVL < PlayerGlobals.Instance.MaxShovelLVL)
                 {
@@ -140,7 +140,7 @@ public class NPCVInteractable : NPCInteractable
                 }
                
             }
-            else if (currenTitle == "Pulpería")
+            else if (currenTitle == "Pulperia")
             {
 
                 if (PlayerGlobals.Instance.Hunger < PlayerGlobals.Instance.MaxHunger)
@@ -165,7 +165,7 @@ public class NPCVInteractable : NPCInteractable
     {
         if(PlayerGlobals.Instance.Tokens >= bigCost)
         {
-            if (currenTitle == "Herrería")
+            if (currenTitle == "Herreria")
             {
                 if(PlayerGlobals.Instance.BagLVL < PlayerGlobals.Instance.MaxBagLVL)
                 {
@@ -173,7 +173,7 @@ public class NPCVInteractable : NPCInteractable
                     Buy(bigCost);
                 }
             }
-            else if (currenTitle == "Pulpería")
+            else if (currenTitle == "Pulperia")
             {
                 if(PlayerGlobals.Instance.Hunger < PlayerGlobals.Instance.MaxHunger)
                 {

@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "CaveZone")
         {
             endWorkButton.gameObject.SetActive(true);
-            popUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Estás seguro/a?";
+            popUp.GetComponentInChildren<TextMeshProUGUI>().text = "Estas seguro/a?";
         }
 
         Debug.Log(PlayerGlobals.Instance.SuspicionLVL);
@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
         textMP[0].text = PlayerGlobals.Instance.Saltpeter + "/" + PlayerGlobals.Instance.maxSaltpeter;
         hungerSlide.value = PlayerGlobals.Instance.Hunger / PlayerGlobals.Instance.MaxHunger;
         textMP[1].text = PlayerGlobals.Instance.Tokens.ToString("0.0");
-        textMP[3].text = "Día: " + PlayerGlobals.Instance.Day.ToString();
+        textMP[3].text = "Dia: " + PlayerGlobals.Instance.Day.ToString();
 
 
         GameObject oPlayer = GameObject.Find("Player");

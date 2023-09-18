@@ -11,13 +11,13 @@ public class GoToNextScene : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Town")
         {
-            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Ir a la Zona de extracción?";
+            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "Ir a la Zona de extraccion?";
         }else if(SceneManager.GetActiveScene().name == "TownNight")
         {
-            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Ir a dormir?";
+            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "Ir a dormir?";
         }else if(SceneManager.GetActiveScene().name == "Tutorial")
         {
-            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "¿Volver al menú?";
+            PopUp.GetComponentInChildren<TextMeshProUGUI>().text = "Volver al menu?";
         } 
 
         if (collision.CompareTag("Player"))

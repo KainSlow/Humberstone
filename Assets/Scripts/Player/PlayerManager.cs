@@ -48,7 +48,6 @@ public class PlayerManager : MonoBehaviour
 
         PlayerGlobals.Instance.OnBuy += UpdateAttackCd;
 
-
     }
 
     private void Start()
